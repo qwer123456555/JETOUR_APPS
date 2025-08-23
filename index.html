@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Установка приложений Jetour</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Установка приложений на Jetour</h1>
+      <p>Современно. Удобно. Безопасно.</p>
+      <a href="#form" class="btn">Оставить заявку</a>
+    </div>
+  </section>
+
+  <!-- Преимущества -->
+  <section class="advantages">
+    <h2>Наши преимущества</h2>
+    <div class="adv-cards">
+      <div class="card">
+        <h3>Безопасность</h3>
+        <p>Установка без вмешательства в системы авто</p>
+      </div>
+      <div class="card">
+        <h3>Гарантия</h3>
+        <p>Гарантия на автомобиль сохраняется</p>
+      </div>
+      <div class="card">
+        <h3>Удобство</h3>
+        <p>Быстрая установка нужных приложений</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Выбор моделей -->
+  <section class="models">
+    <h2>Выберите модель Jetour</h2>
+    <div class="model-card" onclick="toggleModel(this)">
+      <h3>Jetour X70</h3>
+      <p class="hidden">Поддержка установки всех приложений, настройка навигации, мультимедиа и сервисов.</p>
+    </div>
+    <div class="model-card" onclick="toggleModel(this)">
+      <h3>Jetour X90</h3>
+      <p class="hidden">Расширенный функционал: мультимедиа, Android Auto, Apple CarPlay, сервисные приложения.</p>
+    </div>
+  </section>
+
+  <!-- Галерея -->
+  <section class="gallery">
+    <h2>Галерея</h2>
+    <div class="gallery-grid">
+      <img src="img/example1.jpg" alt="Установка 1">
+      <img src="img/example2.jpg" alt="Установка 2">
+      <img src="img/example3.jpg" alt="Установка 3">
+    </div>
+  </section>
+
+  <!-- Форма -->
+  <section id="form" class="form-section">
+    <h2>Оставьте заявку</h2>
+    <form>
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="tel" placeholder="Телефон" required>
+      <button type="submit">Отправить</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 Установка приложений Jetour</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
