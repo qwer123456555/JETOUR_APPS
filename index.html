@@ -1,0 +1,285 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Установка приложений для JETOUR — Навигация, Музыка, Радио</title>
+  <meta name="description" content="Профессиональная установка приложений на мультимедиа JETOUR. Яндекс Навигатор, Яндекс Музыка, онлайн-радио, браузер и другие. Без вмешательства в проводку, с сохранением гарантии."/>
+  <link rel="stylesheet" href="style.css"/>
+  <style>/* fallback if CSS fails */ body{background:#0b0f18; color:#e9edf6} </style>
+</head>
+<body>
+<!-- SVG sprite with brand/app icons -->
+<svg width="0" height="0" class="hidden" aria-hidden="true" style="position:absolute">
+  <defs>
+    <symbol id="icon-clock" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M12 7v6l4 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-warranty" viewBox="0 0 24 24">
+      <path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M8 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-tools" viewBox="0 0 24 24">
+      <path d="M12 2a5 5 0 0 0 3.5 8.5L22 17l-3 3-6.5-6.5A5 5 0 1 1 12 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="icon-map" viewBox="0 0 24 24">
+      <path d="M3 6l6-3 6 3 6-3v15l-6 3-6-3-6 3V6z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="10" r="2" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-grid" viewBox="0 0 24 24">
+      <path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-support" viewBox="0 0 24 24">
+      <path d="M12 3a9 9 0 1 0 0 18 7 7 0 0 0 7-7" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M8 21v-3a4 4 0 0 1 4-4h1" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24">
+      <path d="M22 16.92V20a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 2 4.18 2 2 0 0 1 4 2h3.09a2 2 0 0 1 2 1.72l.5 3a2 2 0 0 1-.57 1.82L7.91 10.09a16 16 0 0 0 6 6l1.55-1.55a2 2 0 0 1 1.82-.57l3 .5A2 2 0 0 1 22 16.92z" fill="none" stroke="currentColor" stroke-width="2" />
+    </symbol>
+    <symbol id="icon-telegram" viewBox="0 0 24 24">
+      <path d="M22 2L2 12l6 2 2 6 4-5 5-13z" fill="none" stroke="currentColor" stroke-width="2" />
+    </symbol>
+    <symbol id="chev" viewBox="0 0 24 24">
+      <path d="M7 10l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </symbol>
+    <!-- Simple-Icons style brand shapes (subset) -->
+    <symbol id="si-yandex" viewBox="0 0 24 24">
+      <path d="M11.748 0c-2.83 0-4.548 1.54-4.548 4.115v15.77C7.2 22.914 6.32 24 4.563 24H0v-2.667h2.47c.697 0 .917-.305.917-.932V4.29C3.387 1.563 5.43 0 8.67 0h3.078v2.667zm.504 24h-3.08v-2.667h3.08z" fill="currentColor"/>
+    </symbol>
+    <symbol id="si-yandexmusic" viewBox="0 0 24 24">
+      <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm2.157 6.857c1.2 0 2.172.972 2.172 2.172 0 1.2-.972 2.172-2.172 2.172-.395 0-.764-.105-1.086-.288v6.517a2.743 2.743 0 0 1-2.743 2.743 2.743 2.743 0 0 1-2.743-2.743 2.743 2.743 0 0 1 2.743-2.743c.41 0 .797.1 1.136.277V8.01c0-.635.515-1.153 1.15-1.153h1.371z" fill="currentColor"/>
+    </symbol>
+    <symbol id="si-chrome" viewBox="0 0 24 24">
+      <path d="M12 2a10 10 0 0 1 8.66 5H12a5 5 0 0 0-4.33 2.5L3.34 5.5A10 10 0 0 1 12 2zm0 20a10 10 0 0 1-8.66-5H12a5 5 0 0 0 4.33-2.5l4.33 4A10 10 0 0 1 12 22zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm10-3a10 10 0 0 1-1.34 5h-4.99A5 5 0 0 0 12 9H6.99A10 10 0 0 1 12 4a10 10 0 0 1 10 8z" fill="currentColor"/>
+    </symbol>
+    <symbol id="si-telegram" viewBox="0 0 24 24">
+      <path d="M23.953 2.627a1.2 1.2 0 00-1.23-.26L1.54 10.23a1.2 1.2 0 00.06 2.25l5.57 1.79 2.17 6.53a1.2 1.2 0 001.97.47l3.15-3.2 5.4 4.1a1.2 1.2 0 001.9-.67l3.1-17.96a1.2 1.2 0 00-.02-.92z" fill="currentColor"/>
+    </symbol>
+    <symbol id="icon-radio" viewBox="0 0 24 24">
+      <circle cx="7" cy="17" r="2" fill="currentColor"/>
+      <path d="M3 21h18v-6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6zM5 9l14-6" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24">
+      <path d="M12 2l7 4v6c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-4z" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M7 17l10-10" stroke="currentColor" stroke-width="2" />
+    </symbol>
+    <symbol id="jetour-shield" viewBox="0 0 24 24">
+      <path d="M12 2l8 4v5c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V6l8-4z" fill="currentColor"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="site-header">
+  <div class="container navbar">
+    <a class="logo" href="#top" aria-label="JETOUR Apps">
+      <div class="logo-badge"><span></span></div>
+      <div class="brand">JETOUR&nbsp;APPS</div>
+    </a>
+    <nav class="nav">
+      <a href="#models">Модели</a>
+      <a href="#benefits">Преимущества</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top" role="region" aria-label="Главная">
+  <div class="hero-art"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <h1>Установка приложений на мультимедиа <span style="white-space:nowrap">JETOUR</span></h1>
+        <p>Навигатор, музыка, онлайн‑радио, браузер и ещё многое — быстро и аккуратно. Гарантия сохраняется.</p>
+        <div class="cta">
+          <a class="btn primary" href="tel:+79039408777"><svg width="20" height="20"><use href="#icon-phone"/></svg>Позвонить: +7 903 940‑87‑77</a>
+          <a class="btn ghost" href="https://t.me/vladissslav" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#si-telegram"/></svg>Написать в Telegram</a>
+        </div>
+        <div class="kpis">
+          <div class="kpi">Время установки: ~20 минут</div>
+          <div class="kpi">Выезд или удалённо</div>
+          <div class="kpi">Поддержка 24/7</div>
+        </div>
+      </div>
+      <div class="hero-image" aria-hidden="true">
+        <img src="https://jetourglobal.com/data/tms/website/html/images/carModel/dashing/dashingbanneren.jpg" alt="JETOUR Dashing на скорости">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="benefits">
+  <div class="container">
+    <h2 class="section-title">Почему именно мы</h2>
+    <p class="section-sub">Делаем всё бережно и прозрачно — как для себя.</p>
+
+    <div class="benefits">
+      <div class="benefit"><svg class="i" viewBox="0 0 24 24"><use href="#icon-clock"/></svg><div><h4>Всего 20 минут</h4><small>Быстро и без очередей</small></div></div>
+      <div class="benefit"><svg class="i" viewBox="0 0 24 24"><use href="#icon-warranty"/></svg><div><h4>Гарантия сохраняется</h4><small>Без вмешательства в проводку</small></div></div>
+      <div class="benefit"><svg class="i" viewBox="0 0 24 24"><use href="#icon-tools"/></svg><div><h4>Аккуратная установка</h4><small>Только проверенные решения</small></div></div>
+      <div class="benefit"><svg class="i" viewBox="0 0 24 24"><use href="#icon-map"/></svg><div><h4>Выезд/удалённо</h4><small>Работаем по договорённости</small></div></div>
+      <div class="benefit"><svg class="i" viewBox="0 0 24 24"><use href="#icon-grid"/></svg><div><h4>Много приложений</h4><small>Навигатор, музыка, радио, браузер…</small></div></div>
+      <div class="benefit"><svg class="i" viewBox="0 0 24 24"><use href="#icon-support"/></svg><div><h4>Поддержка 24/7</h4><small>Помощь по любым вопросам</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="models">
+  <div class="container">
+    <h2 class="section-title">Поддерживаемые модели</h2>
+    <p class="section-sub">В каждой карточке — галерея, список приложений и быстрые контакты.</p>
+
+    <div class="models">
+      <!-- Dashing -->
+      <article class="model model-card">
+        <div class="model-head">
+          <div class="model-thumb"><img alt="JETOUR Dashing" src="https://jetourglobal.com/data/tms/website/html/images/carModel/dashing/Blackcar.png"></div>
+          <div class="model-title">
+            <h3 style="margin:0">JETOUR Dashing</h3>
+          </div>
+          <div class="price">Установка: 7 000 ₽</div>
+          <div class="toggle"><svg width="18" height="18"><use href="#chev"/></svg></div>
+        </div>
+        <div class="model-body">
+          <div class="model-grid">
+            <div class="slider" data-name="dashing">
+              <div class="slides">
+                <div class="slide"><img src="https://jetourglobal.com/data/tms/website/html/images/carModel/dashing/dashingbanneren.jpg" alt="Dashing — баннер"></div>
+                <div class="slide"><img src="https://jetourglobal.com/data/tms/website/html/images/carModel/dashing/Blackcar.png" alt="Dashing — чёрный"></div>
+                <div class="slide"><img src="https://jetourglobal.com/data/tms/website/html/images/carModel/dashing/Graycar.png" alt="Dashing — серый"></div>
+                <div class="slide"><img src="https://jetourglobal.com/data/tms/website/html/images/carModel/dashing/LightGraycar.png" alt="Dashing — белый"></div>
+              </div>
+              <button class="arrow prev" aria-label="Назад">‹</button>
+              <button class="arrow next" aria-label="Вперёд">›</button>
+            </div>
+            <aside class="model-info">
+              <h4 style="margin:0 0 8px">Что установим</h4>
+              <div class="app-list">
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-yandex"/></svg><b>Навигатор</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-yandexmusic"/></svg><b>Яндекс Музыка</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-chrome"/></svg><b>Браузер</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-radio"/></svg><b>Онлайн‑радио</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-shield"/></svg><b>Антирадар*</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-grid"/></svg><b>Магазин приложений</b></div>
+              </div>
+              <div class="model-actions">
+                <a class="btn primary" href="tel:+79039408777"><svg width="18" height="18"><use href="#icon-phone"/></svg>Позвонить</a>
+                <a class="btn ghost" target="_blank" rel="noopener" href="https://t.me/vladissslav"><svg width="18" height="18"><use href="#si-telegram"/></svg>Telegram</a>
+              </div>
+              <p style="color:#9AA3B8; font-size:12px; margin:10px 0 0">* Для Android 9.</p>
+            </aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- X70 PLUS -->
+      <article class="model model-card">
+        <div class="model-head">
+          <div class="model-thumb"><img alt="JETOUR X70 PLUS" src="https://www.jetourglobal.com/data/tms/website/html/images/carModel/x70p/Whitecar.png"></div>
+          <div class="model-title">
+            <h3 style="margin:0">JETOUR X70 PLUS</h3>
+          </div>
+          <div class="price">Установка: 7 000 ₽</div>
+          <div class="toggle"><svg width="18" height="18"><use href="#chev"/></svg></div>
+        </div>
+        <div class="model-body">
+          <div class="model-grid">
+            <div class="slider" data-name="x70p">
+              <div class="slides">
+                <div class="slide"><img src="https://www.jetourglobal.com/data/tms/website/html/images/carModel/x70p/x70pbanneres.jpg" alt="X70 Plus — баннер"></div>
+                <div class="slide"><img src="https://www.jetourglobal.com/data/tms/website/html/images/carModel/x70p/Whitecar.png" alt="X70 Plus — белый"></div>
+                <div class="slide"><img src="https://www.jetourglobal.com/data/tms/website/html/images/carModel/x70p/Techgreycar.png" alt="X70 Plus — серый"></div>
+              </div>
+              <button class="arrow prev" aria-label="Назад">‹</button>
+              <button class="arrow next" aria-label="Вперёд">›</button>
+            </div>
+            <aside class="model-info">
+              <h4 style="margin:0 0 8px">Что установим</h4>
+              <div class="app-list">
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-yandex"/></svg><b>Навигатор</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-yandexmusic"/></svg><b>Яндекс Музыка</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-chrome"/></svg><b>Браузер</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-radio"/></svg><b>Онлайн‑радио</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-shield"/></svg><b>Антирадар*</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-grid"/></svg><b>Магазин приложений</b></div>
+              </div>
+              <div class="model-actions">
+                <a class="btn primary" href="tel:+79039408777"><svg width="18" height="18"><use href="#icon-phone"/></svg>Позвонить</a>
+                <a class="btn ghost" target="_blank" rel="noopener" href="https://t.me/vladissslav"><svg width="18" height="18"><use href="#si-telegram"/></svg>Telegram</a>
+              </div>
+              <p style="color:#9AA3B8; font-size:12px; margin:10px 0 0">* Для Android 9.</p>
+            </aside>
+          </div>
+        </div>
+      </article>
+
+      <!-- T2 -->
+      <article class="model model-card">
+        <div class="model-head">
+          <div class="model-thumb"><img alt="JETOUR T2" src="https://jetourglobal.com/data/tms/website/html/images/carModel/t2/Silver-Snowcar.png"></div>
+          <div class="model-title">
+            <h3 style="margin:0">JETOUR T2</h3>
+          </div>
+          <div class="price">Установка: 8 000 ₽</div>
+          <div class="toggle"><svg width="18" height="18"><use href="#chev"/></svg></div>
+        </div>
+        <div class="model-body">
+          <div class="model-grid">
+            <div class="slider" data-name="t2">
+              <div class="slides">
+                <div class="slide"><img src="https://jetourglobal.com/data/tms/website/html/images/carModel/t2/7_1.jpg" alt="T2 — баннер"></div>
+                <div class="slide"><img src="https://jetourglobal.com/data/tms/website/html/images/carModel/t2/Silver-Snowcar.png" alt="T2 — серебристый"></div>
+                <div class="slide"><img src="https://jetourglobal.com/data/tms/website/html/images/carModel/t2/Night-Blackcar.png" alt="T2 — чёрный"></div>
+              </div>
+              <button class="arrow prev" aria-label="Назад">‹</button>
+              <button class="arrow next" aria-label="Вперёд">›</button>
+            </div>
+            <aside class="model-info">
+              <h4 style="margin:0 0 8px">Что установим</h4>
+              <div class="app-list">
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-yandex"/></svg><b>Навигатор</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-yandexmusic"/></svg><b>Яндекс Музыка</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#si-chrome"/></svg><b>Браузер</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-radio"/></svg><b>Онлайн‑радио</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-shield"/></svg><b>Антирадар*</b></div>
+                <div class="app"><svg class="logo" viewBox="0 0 24 24"><use href="#icon-grid"/></svg><b>Магазин приложений</b></div>
+              </div>
+              <div class="model-actions">
+                <a class="btn primary" href="tel:+79039408777"><svg width="18" height="18"><use href="#icon-phone"/></svg>Позвонить</a>
+                <a class="btn ghost" target="_blank" rel="noopener" href="https://t.me/vladissslav"><svg width="18" height="18"><use href="#si-telegram"/></svg>Telegram</a>
+              </div>
+              <p style="color:#9AA3B8; font-size:12px; margin:10px 0 0">* Для Android 9.</p>
+            </aside>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contacts">
+  <div class="container">
+    <h2 class="section-title">Свяжитесь с нами</h2>
+    <p class="section-sub">Обычно всё занимает ~20 минут. Отвечаем быстро.</p>
+    <div class="cta">
+      <a class="btn primary" href="tel:+79039408777"><svg width="20" height="20"><use href="#icon-phone"/></svg>Позвонить: +7 903 940‑87‑77</a>
+      <a class="btn ghost" href="https://t.me/vladissslav" target="_blank" rel="noopener"><svg width="20" height="20"><use href="#si-telegram"/></svg>Написать в Telegram</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="logo" style="gap:10px"><div class="logo-badge" style="width:28px;height:28px"><span></span></div><div class="brand">JETOUR&nbsp;APPS</div></div>
+      <div class="credits">Изображения: Jetour Global.</div>
+    </div>
+    <div class="hr"></div>
+    <div class="credits">© 2025. Установка сторонних приложений на мультимедиа JETOUR. Не является официальным сайтом Jetour.</div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
