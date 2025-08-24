@@ -3,391 +3,138 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Установка приложений на китайское авто</title>
+  <title>Android Auto: Установка приложений — Быстро • Безопасно • Без вмешательства</title>
+  <meta name="description" content="🔥 NEW: Установка браузера и приложений (рутуб, фильмы) в Android Auto. Без вскрытия авто и пайки. Гарантия сохраняется. Работаю по Москве и удалённо." />
   <meta property="og:title" content="Android Auto — Быстро • Безопасно • Без вмешательства" />
+  <meta property="og:description" content="Установка браузера и приложений в Android Auto: 15–20 минут, без вмешательства, официально и безопасно. Поддержка популярных марок: Haval, Geely, Changan, Tank, Jetour и др." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'></text></svg>">
-  <!-- Tailwind Play CDN -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚗</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
-            sans: ["Inter", "SF Pro Display", "SF Pro Text", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"],
+            sans: ["Inter", "SF Pro Display", "SF Pro Text", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial"]
           },
           colors: {
-            base: {
-              900: "#0b0b0c",
-              800: "#111113",
-              700: "#151518",
-            },
+            base: { 900: "#0b0b0c" },
             glass: "rgba(255,255,255,0.06)",
             accent: "#67e8f9",
           },
-          boxShadow: {
-            glow: "0 0 0 1px rgba(255,255,255,0.06), 0 8px 30px rgba(0,0,0,0.35)",
-          },
-          backdropBlur: {
-            xs: '2px',
-          }
+          boxShadow: { glow: "0 0 0 1px rgba(255,255,255,0.06), 0 8px 30px rgba(0,0,0,0.35)" },
         }
       }
     }
   </script>
   <style>
-    /* Glass + subtle noise */
-    .glass { background: radial-gradient(1200px 600px at 50% -20%, rgba(103,232,249,0.08), transparent 60%),
-                              linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-             backdrop-filter: blur(12px) saturate(120%);
-             -webkit-backdrop-filter: blur(12px) saturate(120%);
-             border: 1px solid rgba(255,255,255,0.08); }
-    .tap { transition: transform .15s ease, opacity .2s ease; }
-    .tap:active { transform: scale(0.98); opacity:.9; }
-    .reveal { opacity: 0; transform: translateY(14px) scale(.98); transition: all .7s cubic-bezier(.2,.65,.2,1); }
-    .reveal.in { opacity: 1; transform: translateY(0) scale(1); }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
     .accordion-content { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
-    .accordion.open .accordion-content { max-height: 1600px; }
-    .gradient-text { background: linear-gradient(90deg,#fff, #a7f3d0, #67e8f9); -webkit-background-clip: text; background-clip:text; color: transparent; }
-    .shine { position: relative; overflow: hidden; }
-    .shine::after { content:""; position:absolute; inset:-200% -50% auto; width:120%; height:300%; transform: rotate(12deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); animation: shine 6s linear infinite; }
-    @keyframes shine { 0% { left:-140%; } 100% { left:120%; } }
+    .accordion.open > .accordion-content { max-height: 2000px; }
+    .carousel { position: relative; }
+    .carousel img { width: 100%; border-radius: 12px; }
+    .carousel-controls { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); }
+    .carousel-controls button { background: rgba(0,0,0,0.4); color: white; border-radius: 50%; width: 32px; height: 32px; }
   </style>
 </head>
-<body class="bg-base-900 text-white font-sans selection:bg-accent/30 selection:text-white">
-  <!-- Backdrop aurora -->
-  <div class="pointer-events-none fixed inset-0 -z-10">
-    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[90vw] h-[90vw] rounded-full blur-3xl opacity-20 bg-cyan-500"></div>
-    <div class="absolute bottom-0 right-0 w-[55vw] h-[55vw] rounded-full blur-3xl opacity-10 bg-emerald-400"></div>
-  </div>
-
-  <!-- Header -->
+<body class="bg-base-900 text-white font-sans">
   <header class="sticky top-0 z-40 backdrop-blur-md bg-black/30 border-b border-white/10">
     <div class="max-w-screen-md mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <div class="w-8 h-8 rounded-2xl glass grid place-items-center shadow-glow">🚗</div>
-        <span class="text-sm tracking-wide text-white/80">Установка приложений</span>
+        <span class="text-sm tracking-wide text-white/80">Android Auto • Install</span>
       </div>
-      <nav class="hidden sm:flex items-center gap-3 text-sm text-white/70">
-        <a href="#prices" class="hover:text-white transition">Цены</a>
-        <a href="#cars" class="hover:text-white transition">Авто</a>
-        <a href="#apps" class="hover:text-white transition">Приложения</a>
-        <a href="#contact" class="hover:text-white transition">Связь</a>
-      </nav>
-      <a href="#contact" class="tap px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-sm">Записаться</a>
+      <a href="#contact" class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-sm">Записаться</a>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="max-w-screen-md mx-auto px-4 py-10 sm:py-14">
-    <div class="glass rounded-3xl p-6 sm:p-8 shadow-glow reveal shine">
-      <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-3">Быстро • Безопасно • Без вмешательства</p>
-      <h1 class="text-3xl sm:text-5xl font-semibold leading-tight mb-4">Установка приложений на <span class="gradient-text">КИТАЙСКИЕ</span> авто</h1>
-      <p class="text-white/80 text-sm sm:text-base"> Без вскрытия авто и пайки. Гарантия сохраняется. Программы можно удалить в любой момент без следов.</p>
-      <ul class="grid grid-cols-2 gap-2 text-xs sm:text-sm text-white/80 mt-5">
-        <li class="glass rounded-xl p-3">⏱️ Время установки — <b>15–20 минут</b></li>
-        <li class="glass rounded-xl p-3">📍 Работаю удалённо или с выездом по Москве</li>
-      </ul>
-      <div class="mt-6 flex gap-3">
-        <a href="#contact" class="tap px-5 py-3 rounded-2xl bg-white text-black font-medium">Связаться</a>
-        <a href="#prices" class="tap px-5 py-3 rounded-2xl bg-white/10 border border-white/10">Смотреть цены</a>
-      </div>
+  <section class="max-w-screen-md mx-auto px-4 py-10">
+    <div class="glass rounded-3xl p-6 shadow-glow">
+      <h1 class="text-3xl font-semibold mb-3">Установка приложений в <span class="text-cyan-300">Android Auto</span></h1>
+      <p class="text-white/80">🔥 NEW: установка браузера (рутуб, фильмы) — <b>2000 ₽</b>. Без вскрытия авто и пайки. Гарантия сохраняется. Установка 15–20 минут.</p>
     </div>
   </section>
 
-  <!-- NEW offer card -->
-  <section class="max-w-screen-md mx-auto px-4">
-    <div class="glass rounded-3xl p-5 sm:p-6 shadow-glow reveal">
-      <div class="flex items-start gap-3">
-        <div class="text-2xl">🔥</div>
-        <div>
-          <h2 class="text-xl sm:text-2xl font-semibold mb-1">NEW — Браузер в Android Auto</h2>
-          <p class="text-white/80 text-sm">Рутуб, онлайн‑кино, серфинг — прямо на экране авто. Цена: <b>2000 ₽</b>. Установка удалённо, быстро, аккуратно.</p>
+  <!-- Cars and Models -->
+  <section id="cars" class="max-w-screen-md mx-auto px-4 mt-8">
+    <h2 class="text-2xl font-semibold mb-4">Поддерживаемые авто</h2>
+    <div class="grid grid-cols-2 gap-3">
+      <div class="glass rounded-2xl p-4 shadow-glow accordion">
+        <button class="w-full text-left flex justify-between" data-acc>
+          <span class="font-medium">Haval</span><span>+</span>
+        </button>
+        <div class="accordion-content mt-3 pl-3 space-y-3">
+          <div class="accordion">
+            <button class="w-full text-left flex justify-between text-sm" data-acc>
+              <span>F7 New — 10 000 ₽</span><span>+</span>
+            </button>
+            <div class="accordion-content mt-2 space-y-2">
+              <div class="carousel">
+                <img src="https://source.unsplash.com/featured/?Haval%20F7" alt="Haval F7" />
+              </div>
+              <ul class="text-sm text-white/80">
+                <li>🗺️ Яндекс.Навигатор</li>
+                <li>🎬 Кинопоиск HD</li>
+                <li>▶️ YouTube</li>
+              </ul>
+              <p class="text-sm mt-2">Цена: 10 000 ₽</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-4 shadow-glow accordion">
+        <button class="w-full text-left flex justify-between" data-acc>
+          <span class="font-medium">Tank</span><span>+</span>
+        </button>
+        <div class="accordion-content mt-3 pl-3 space-y-3">
+          <div class="accordion">
+            <button class="w-full text-left flex justify-between text-sm" data-acc>
+              <span>Tank 700 — 10 000 ₽</span><span>+</span>
+            </button>
+            <div class="accordion-content mt-2 space-y-2">
+              <div class="carousel">
+                <img src="https://source.unsplash.com/featured/?Tank%20700%20car" alt="Tank 700" />
+              </div>
+              <ul class="text-sm text-white/80">
+                <li>🌐 Браузер</li>
+                <li>🎵 Яндекс.Музыка</li>
+                <li>📻 Онлайн-радио</li>
+              </ul>
+              <p class="text-sm mt-2">Цена: 10 000 ₽</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Features -->
-  <section class="max-w-screen-md mx-auto px-4 mt-8 grid gap-3 sm:grid-cols-3">
-    <div class="glass rounded-2xl p-4 shadow-glow reveal">
-      <div class="text-2xl mb-2">🔧</div>
-      <h3 class="font-medium mb-1">Без вскрытия</h3>
-      <p class="text-white/80 text-sm">Никакой пайки и вмешательства в системы. Всё официально и безопасно.</p>
-    </div>
-    <div class="glass rounded-2xl p-4 shadow-glow reveal">
-      <div class="text-2xl mb-2">✅</div>
-      <h3 class="font-medium mb-1">Гарантия сохраняется</h3>
-      <p class="text-white/80 text-sm">Все действия обратимы — можно удалить без следов.</p>
-    </div>
-    <div class="glass rounded-2xl p-4 shadow-glow reveal">
-      <div class="text-2xl mb-2">⚡</div>
-      <h3 class="font-medium mb-1">15–20 минут</h3>
-      <p class="text-white/80 text-sm">Быстрая установка на месте или удалённо.</p>
-    </div>
-  </section>
-
-  <!-- Prices -->
-  <section id="prices" class="max-w-screen-md mx-auto px-4 mt-10">
-    <h2 class="text-2xl sm:text-3xl font-semibold mb-4 reveal">Цены</h2>
-
-    <div class="grid gap-3">
-      <!-- Tier 10000 -->
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div>
-            <div class="text-sm text-white/60">Премиум</div>
-            <div class="text-xl font-semibold">💎 10 000 ₽</div>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 text-sm text-white/85">
-          Наvаl F7 Nеw, Wеy 07, Таnk 700
-        </div>
-      </div>
-
-      <!-- Tier 5000 -->
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div>
-            <div class="text-sm text-white/60">Расширенный</div>
-            <div class="text-xl font-semibold">💎 5 000 ₽</div>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 text-sm text-white/85">
-          Jеtоur Т2, Jаесоо J8, Jаесоо J7, Ехееd RХ, Таnk 300, Таnk 500, Gееly Рrеfасе, Gееly Аtlаs (2G) 2024, Dаrgо, Gееly Моnjаrо, FAW Bestune B70, UNI‑T, Omoda C5, S5, Baic X7, BG X70
-        </div>
-      </div>
-
-      <!-- Tier 4000 -->
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div>
-            <div class="text-sm text-white/60">Стандарт</div>
-            <div class="text-xl font-semibold">💎 4 000 ₽</div>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 text-sm text-white/85">
-          Сhаngаn UNI‑К, UNI‑S, СS55 Plus, СS35 Plus, Lamore, EADO Plus, Haval M3, GAC GS8, M8
-        </div>
-      </div>
-
-      <!-- Tier 3000 -->
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div>
-            <div class="text-sm text-white/60">База</div>
-            <div class="text-xl font-semibold">💎 3 000 ₽</div>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 text-sm text-white/85">
-          Chery Arrizo 8, Haval M6
-        </div>
-      </div>
-
-      <!-- Tier 1500 -->
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div>
-            <div class="text-sm text-white/60">Эконом</div>
-            <div class="text-xl font-semibold">💎 1 500 ₽</div>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 text-sm text-white/85">
-          Jetour Dashing, X70 Plus, X90 Plus, Haval Jolion (приложения или активация DTS)
-        </div>
-      </div>
-
-      <p class="text-white/70 text-sm px-1 reveal">💎 И другие — уточняйте модель в сообщениях.</p>
-    </div>
-  </section>
-
-  <!-- Supported cars with images (accordions per brand) -->
-  <section id="cars" class="max-w-screen-md mx-auto px-4 mt-10">
-    <h2 class="text-2xl sm:text-3xl font-semibold mb-4 reveal">Поддерживаемые авто</h2>
-
-    <div class="grid gap-3">
-      <!-- Brand group template repeated -->
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Tank</span>
-            <span class="text-white/60 text-sm">300 • 500 • 700</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Tank 300|Tank 500|Tank 700"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Lixiang / Wey</span>
-            <span class="text-white/60 text-sm">Wey 07</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Lixiang|Wey 07"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Changan</span>
-            <span class="text-white/60 text-sm">UNI-К • UNI‑S • UNI‑T • UNI‑V • CS55 Plus • CS35 Plus • CS95 • Lamore • EADO Plus</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Changan UNI-K|Changan UNI-S|Changan UNI-T|Changan UNI-V|Changan CS55 Plus|Changan CS35 Plus|Changan CS95|Changan Lamore|Changan EADO Plus"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Geely</span>
-            <span class="text-white/60 text-sm">Preface • Monjaro • Atlas (2G) • X50 • X70</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Geely Preface|Geely Monjaro|Geely Atlas 2|Geely X50|Geely X70"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Jaecoo / Jetour</span>
-            <span class="text-white/60 text-sm">J7 • J8 • T2 • Traveller • Dashing • X70 Plus • X90 Plus</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Jaecoo J7|Jaecoo J8|Jetour T2|Jetour Traveller|Jetour Dashing|Jetour X70 Plus|Jetour X90 Plus"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Chery</span>
-            <span class="text-white/60 text-sm">Arrizo 8</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Chery Arrizo 8"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Haval</span>
-            <span class="text-white/60 text-sm">Jolion • M6 • M3 • F7 рест • F7x • H3 • H9 • F7 New</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Haval Jolion|Haval M6|Haval M3|Haval F7 2023|Haval F7x|Haval H3|Haval H9|Haval F7 New"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">Omoda</span>
-            <span class="text-white/60 text-sm">S5 • C5</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="Omoda S5|Omoda C5"></div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">
-        <button class="w-full text-left accordion flex items-center justify-between" data-acc>
-          <div class="flex items-center gap-2">
-            <span class="text-lg font-medium">BAIC / Exeed / GAC / FAW</span>
-            <span class="text-white/60 text-sm">BAIC X7 • Exeed RX • GAC GS8 • GAC M8 • FAW Bestune B70</span>
-          </div>
-          <span class="text-white/50">Раскрыть</span>
-        </button>
-        <div class="accordion-content mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3" data-cars="BAIC X7|Exeed RX|GAC GS8|GAC M8|FAW Bestune B70"></div>
-      </div>
-
-      <p class="text-white/70 text-sm px-1 reveal">И другие — уточняйте модель в сообщениях.</p>
-    </div>
-  </section>
-
-  <!-- Apps -->
-  <section id="apps" class="max-w-screen-md mx-auto px-4 mt-10">
-    <h2 class="text-2xl sm:text-3xl font-semibold mb-4 reveal">Что устанавливаю</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🗺️ Яндекс.Навигатор с Алисой</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🎵 Яндекс.Музыка</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🎬 Кинопоиск HD</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">▶️ YouTube</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🌐 Веб‑браузер</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">📻 Радио и IPTV</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🚫 Антирадар</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🎛️ Эквалайзер</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🛍️ Магазин приложений</div>
-      <div class="glass rounded-2xl p-4 shadow-glow reveal">🎞️ ZONA (кинотеатр)</div>
-    </div>
-  </section>
-
-  <!-- CTA -->
+  <!-- Contact -->
   <section id="contact" class="max-w-screen-md mx-auto px-4 mt-12 mb-16">
-    <div class="glass rounded-3xl p-6 sm:p-8 shadow-glow text-center reveal">
-      <h2 class="text-2xl sm:text-3xl font-semibold mb-2">Готовы подключить?</h2>
-      <p class="text-white/80 mb-5">Напишите модель авто и какие приложения нужны — отвечу и подскажу тариф.</p>
+    <div class="glass rounded-3xl p-6 shadow-glow text-center">
+      <h2 class="text-2xl font-semibold mb-2">Связаться</h2>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="https://t.me/" target="_blank" class="tap px-5 py-3 rounded-2xl bg-white text-black font-medium">Telegram</a>
-        <a href="https://wa.me/" target="_blank" class="tap px-5 py-3 rounded-2xl bg-white/10 border border-white/10">WhatsApp</a>
-        <a href="mailto:example@mail.ru" class="tap px-5 py-3 rounded-2xl bg-white/10 border border-white/10">Email</a>
+        <a href="tel:+79039408777" class="px-5 py-3 rounded-2xl bg-white text-black font-medium">📞 +7 903 940 87 77</a>
+        <a href="https://t.me/vladissslav42" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10">Telegram</a>
+        <a href="https://wa.me/79039408777" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10">WhatsApp</a>
       </div>
-      <p class="text-xs text-white/60 mt-4">Работаю удалённо или с выездом по Москве</p>
     </div>
   </section>
 
   <footer class="max-w-screen-md mx-auto px-4 pb-10 text-center text-white/50 text-xs">
-    <p>© <span id="y"></span> Android Auto • Установка приложений. Не является продукцией Google/Apple/брендов авто.</p>
+    <p>© <span id="y"></span> Android Auto • Установка приложений.</p>
   </footer>
 
   <script>
-    // Intersection reveal
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in') })
-    },{ threshold: 0.15 })
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el))
-
-    // Accordions
-    document.querySelectorAll('[data-acc]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const wrap = btn.parentElement
-        wrap.classList.toggle('open')
-      })
-    })
-
-    // Populate car images lazily using Unsplash Source (random but relevant)
-    function makeCard(name){
-      const url = `https://source.unsplash.com/featured/?${encodeURIComponent(name+' car exterior')}`
-      const div = document.createElement('div')
-      div.className = 'rounded-xl overflow-hidden border border-white/10 bg-white/5'
-      div.innerHTML = `
-        <div class="aspect-[4/3] bg-white/5">
-          <img loading="lazy" src="${url}" alt="${name}" class="w-full h-full object-cover">
-        </div>
-        <div class="p-2 text-xs text-white/90 flex items-center justify-between">
-          <span>${name}</span>
-          <a href="#contact" class="tap px-2 py-1 rounded-lg bg-white/10 border border-white/10">Установить</a>
-        </div>`
-      return div
-    }
-    document.querySelectorAll('[data-cars]').forEach(grid=>{
-      const models = grid.getAttribute('data-cars').split('|')
-      models.forEach(m=> grid.appendChild(makeCard(m.trim())))
-    })
-
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear()
+    document.querySelectorAll('[data-acc]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const wrap = btn.parentElement;
+        wrap.classList.toggle('open');
+      });
+    });
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
