@@ -6,7 +6,7 @@
   <title>Установка приложений | Быстро • Безопасно • Без вмешательства</title>
   <meta name="description" content="🔥 NEW: Установка браузера и приложений (рутуб, фильмы) в Android Auto. 15–20 минут. Без вскрытия авто и пайки. Гарантия сохраняется. Москва и удалённо." />
   <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'></text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='https://cdn1.ozone.ru/s3/multimedia-5/6273740405.jpg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'></text></svg>">
 
   <!-- Tailwind (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -83,7 +83,7 @@
   <section class="max-w-screen-md mx-auto px-4 pt-10 pb-6">
     <div class="glass rounded-3xl p-6 ringed animate-fadeUp" data-reveal>
       <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-2">Быстро • Безопасно • Без вмешательства</p>
-      <h1 class="text-3xl font-semibold mb-3">Установка приложений на <span class="text-cyan-300">китайское авто/span></h1>
+      <h1 class="text-3xl font-semibold mb-3">Установка приложений на <span class="text-cyan-300">китайское авто</span> </h1>
       <p class="text-white/80">Расскройте возможности вашего авто на максимум</p>
     </div>
   </section>
@@ -93,7 +93,7 @@
     <div class="glass rounded-3xl p-5 ringed flex items-center justify-between gap-4 animate-fadeUp" data-reveal>
       <div>
         <div class="text-xs uppercase tracking-[0.25em] text-white/60 mb-1">Новинка</div>
-        <h2 class="text-xl font-semibold">В стоимость входят все приложения. Выезд оплачивается отельно</h2>
+        <h2 class="text-xl font-semibold">🔥 Установка браузера в Android auto (рутуб, фильмы)</h2>
         <p class="text-white/70 text-sm">Работает на любом авто с Android Auto. Легко удаляется без следов.</p>
   </section>
 
@@ -269,7 +269,7 @@
 
       const grid = document.createElement('div'); grid.className='grid grid-cols-1 sm:grid-cols-2 gap-3';
       const apps = document.createElement('div'); apps.appendChild(makeAppsList(data.apps || []));
-      const price = document.createElement('div'); price.className='glass rounded-2xl p-3 ringed'; price.innerHTML = `<div class='text-xs text-white/60 mb-1'>Стоимость</div><div class='text-lg font-semibold'>${money(data.price)}</div><div class='text-xs text-white/60 mt-1'>🔥 Браузер (рутуб, фильмы): 2000 ₽</div>`;
+      const price = document.createElement('div'); price.className='glass rounded-2xl p-3 ringed'; price.innerHTML = `<div class='text-xs text-white/60 mb-1'>Стоимость</div><div class='text-lg font-semibold'>${money(data.price)}</div><div class='text-xs text-white/60 mt-1'>В стоимость входят все приложения. Выезд оплачивается отельно</div>`;
       grid.append(apps, price); content.appendChild(grid);
 
       acc.append(btn, content);
