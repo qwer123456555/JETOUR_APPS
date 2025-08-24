@@ -1,264 +1,174 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Android Auto: Установка приложений — Быстро • Безопасно • Без вмешательства</title>
-  <meta name="description" content="🔥 NEW: Установка браузера и приложений (рутуб, фильмы) в Android Auto. Без вскрытия авто и пайки. Гарантия сохраняется. Работаю по Москве и удалённо." />
-  <meta property="og:title" content="Android Auto — Быстро • Безопасно • Без вмешательства" />
-  <meta property="og:description" content="Установка браузера и приложений в Android Auto: 15–20 минут, без вмешательства, официально и безопасно. Поддержка популярных марок: Haval, Geely, Changan, Tank, Jetour и др." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚗</text></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ["Inter", "SF Pro Display", "ui-sans-serif", "system-ui", "-apple-system"] },
-          colors: { base: { 900: "#0a0a0a" }, accent: "#67e8f9" },
-          boxShadow: {
-            glow: "0 0 0 1px rgba(255,255,255,0.06), 0 10px 40px rgba(0,0,0,0.45)",
-            inner: "inset 0 0 0 1px rgba(255,255,255,0.08)",
-          },
-          keyframes: {
-            floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
-          },
-          animation: { floaty: 'floaty 3.5s ease-in-out infinite' }
-        }
-      }
-    }
-  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Установка приложений в Android Auto</title>
   <style>
-    :root { --glass: rgba(255,255,255,0.06); --border: rgba(255,255,255,0.10); }
-    .glass { background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--border); }
-    .ringed { box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 10px 40px rgba(0,0,0,.45); }
+    /* ===== Стили ===== */
+    * {margin:0;padding:0;box-sizing:border-box;}
+    body,html {height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:white;overflow-x:hidden;}
 
-    /* Reveal */
-    [data-reveal] { opacity:0; transform: translateY(16px) scale(.98); transition: opacity .7s ease, transform .7s ease; }
-    [data-reveal].show { opacity:1; transform: translateY(0) scale(1); }
+    /* Фон видео */
+    #bg-video {position:fixed;right:0;bottom:0;min-width:100%;min-height:100%;z-index:-2;object-fit:cover;}
+    body::before {content:"";position:fixed;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);z-index:-1;}
 
-    /* Accordion */
-    .acc-content { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
-    .acc.open > .acc-content { max-height: 2400px; }
+    section {padding:60px 20px;text-align:center;}
+    h1,h2,h3 {margin-bottom:20px;}
 
-    /* Carousel */
-    .carousel { position: relative; border-radius: 16px; overflow: hidden; }
-    .carousel img { width: 100%; height: 220px; object-fit: cover; display: none; }
-    .carousel img.active { display: block; }
-    .carousel .ctrl { position:absolute; top:50%; transform:translateY(-50%); width:36px; height:36px; display:grid; place-items:center; border-radius:999px; background:rgba(0,0,0,.45); color:#fff; }
-    .carousel .prev { left:8px; }
-    .carousel .next { right:8px; }
-    .carousel .dots { position:absolute; bottom:8px; left:0; right:0; display:flex; gap:6px; justify-content:center; }
-    .carousel .dot { width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.45); }
-    .carousel .dot.active { background:#fff; }
+    .glass {background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:20px;padding:20px;margin:20px auto;max-width:900px;box-shadow:0 8px 32px rgba(0,0,0,0.3);animation:fadeInUp 1s ease both;}
 
-    /* Video bg */
-    .bgvid { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(.35) contrast(1.05) saturate(1.1); }
-    .grad-overlay { position: fixed; inset: 0; z-index: -1; background: radial-gradient(1200px 600px at 50% -10%, rgba(103,232,249,.20), transparent 60%), linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.75)); pointer-events:none; }
+    @keyframes fadeInUp {from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
 
-    /* Pretty focus */
-    :focus-visible { outline: 2px solid rgba(103,232,249,.75); outline-offset: 2px; border-radius: 14px; }
+    .brand {margin:15px 0;cursor:pointer;font-size:1.4em;font-weight:bold;}
+    .model {margin:10px 0;cursor:pointer;font-size:1.2em;}
 
-    /* Floating CTA */
-    .cta-floating { position: fixed; right: 14px; bottom: 14px; z-index: 50; }
+    .hidden {display:none;}
+    .gallery img {max-width:100%;border-radius:15px;margin:10px auto;display:block;}
+
+    ul {list-style:none;padding:0;margin:10px 0;}
+    li {margin:5px 0;}
+
+    .contact {font-size:1.2em;line-height:1.6;}
+    .contact a {color:#0ff;text-decoration:none;}
+
+    /* Кнопка записаться */
+    .cta {position:fixed;bottom:20px;right:20px;background:#0ff;color:#000;padding:15px 25px;border-radius:50px;font-weight:bold;box-shadow:0 6px 20px rgba(0,0,0,0.4);animation:pulse 2s infinite;}
+    @keyframes pulse {0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
   </style>
 </head>
-<body class="bg-base-900 text-white font-sans selection:bg-accent/30 selection:text-white">
-  <!-- Background video + overlay -->
-  <video class="bgvid" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1549924231-f129b911e442?q=80&w=1200&auto=format&fit=crop">
-    <source src="https://cdn.coverr.co/videos/coverr-driving-a-car-through-the-city-1639/1080p.mp4" type="video/mp4">
+<body>
+  <!-- Видео фон -->
+  <video autoplay muted loop id="bg-video">
+    <source src="https://cdn.coverr.co/videos/coverr-driving-through-the-city-at-night-4079/1080p.mp4" type="video/mp4">
   </video>
-  <div class="grad-overlay"></div>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-black/30 border-b border-white/10">
-    <div class="max-w-screen-md mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-2xl glass grid place-items-center ringed animate-floaty">🚗</div>
-        <span class="text-sm tracking-wide text-white/80">Android Auto • Install</span>
-      </div>
-      <a href="#contact" class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-sm hover:bg-white/15 transition">Записаться</a>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="max-w-screen-md mx-auto px-4 pt-10 pb-6">
-    <div class="glass rounded-3xl p-6 ringed" data-reveal>
-      <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-2">Быстро • Безопасно • Без вмешательства</p>
-      <h1 class="text-3xl font-semibold mb-3">Установка приложений в <span class="text-cyan-300">Android Auto</span></h1>
-      <p class="text-white/80">Без вскрытия авто и пайки. Гарантия сохраняется. Установка 15–20 минут. Можно удалить без следов.</p>
+  <!-- Заголовок -->
+  <section>
+    <div class="glass">
+      <h1>🚗 Установка приложений в Android Auto</h1>
+      <p>Быстро • Безопасно • Без вмешательства</p>
     </div>
   </section>
 
-  <!-- NEW block -->
-  <section class="max-w-screen-md mx-auto px-4">
-    <div class="glass rounded-3xl p-5 ringed flex items-center justify-between gap-4" data-reveal>
-      <div>
-        <div class="text-xs uppercase tracking-[0.25em] text-white/60 mb-1">Новинка</div>
-        <h2 class="text-xl font-semibold">🔥 Установка браузера (рутуб, фильмы) — <span class="text-cyan-300 font-bold">2000 ₽</span></h2>
-        <p class="text-white/70 text-sm">Работает на любом авто с Android Auto. Легко удаляется без следов.</p>
-      </div>
-      <a href="tel:+79039408777" class="shrink-0 px-4 py-2 rounded-2xl bg-white text-black font-medium">Позвонить</a>
+  <!-- NEW -->
+  <section>
+    <div class="glass">
+      <h2>🔥 NEW</h2>
+      <p>Установка браузера (рутуб, фильмы) в Android Auto на любое авто — <b>2000₽</b></p>
     </div>
   </section>
 
-  <!-- Benefits -->
-  <section class="max-w-screen-md mx-auto px-4 mt-6">
-    <div class="grid grid-cols-1 gap-3">
-      <div class="glass rounded-2xl p-4 ringed flex items-center gap-3" data-reveal>⏱️ <div><div class="font-medium">15–20 минут</div><div class="text-xs text-white/60">Быстрая установка на месте или удалённо</div></div></div>
-      <div class="glass rounded-2xl p-4 ringed flex items-center gap-3" data-reveal>✅ <div><div class="font-medium">Гарантия сохраняется</div><div class="text-xs text-white/60">Официально и безопасно, без вмешательства в системы</div></div></div>
-      <div class="glass rounded-2xl p-4 ringed flex items-center gap-3" data-reveal>🔧 <div><div class="font-medium">Без вскрытия и пайки</div><div class="text-xs text-white/60">Никаких следов, всё можно удалить</div></div></div>
-      <div class="glass rounded-2xl p-4 ringed flex items-center gap-3" data-reveal>📍 <div><div class="font-medium">Москва и удалённо</div><div class="text-xs text-white/60">Выезд по городу или подключение онлайн</div></div></div>
-      <div class="glass rounded-2xl p-4 ringed flex items-center gap-3" data-reveal>🚀 <div><div class="font-medium">Поддержка</div><div class="text-xs text-white/60">Помощь и обновления по договорённости</div></div></div>
+  <!-- Преимущества -->
+  <section>
+    <div class="glass">
+      <h2>Преимущества</h2>
+      <ul>
+        <li>⏱️ Установка за 15–20 минут</li>
+        <li>✅ Гарантия сохраняется</li>
+        <li>🔧 Без вскрытия и пайки</li>
+        <li>🌍 Работаю удалённо или с выездом по Москве</li>
+        <li>💾 Программы можно удалить без следов</li>
+      </ul>
     </div>
   </section>
 
-  <!-- Brands (one column) → Models → Details -->
-  <section id="cars" class="max-w-screen-md mx-auto px-4 mt-8">
-    <h2 class="text-2xl font-semibold mb-4" data-reveal>Поддерживаемые авто</h2>
-    <div id="brandsList" class="space-y-3"></div>
-    <p class="text-white/70 text-sm mt-3">Если вашей модели нет в списке — напишите, проверю совместимость.</p>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="max-w-screen-md mx-auto px-4 mt-10 mb-16">
-    <div class="glass rounded-3xl p-6 ringed text-center" data-reveal>
-      <h2 class="text-2xl font-semibold mb-2">Связаться</h2>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="tel:+79039408777" class="px-5 py-3 rounded-2xl bg-white text-black font-medium hover:opacity-90 transition">📞 +7 903 940 87 77</a>
-        <a href="https://t.me/vladissslav42" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition">Telegram: @vladissslav42</a>
-        <a href="https://wa.me/79039408777" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition">WhatsApp</a>
-      </div>
-      <p class="text-xs text-white/60 mt-4">Работаю удалённо или с выездом по Москве</p>
+  <!-- Машины -->
+  <section>
+    <div class="glass">
+      <h2>Поддерживаемые авто</h2>
+      <div id="brands"></div>
     </div>
   </section>
 
-  <footer class="max-w-screen-md mx-auto px-4 pb-10 text-center text-white/50 text-xs">
-    <p>© <span id="y"></span> Android Auto • Установка приложений. Не является продукцией Google/Apple/брендов авто.</p>
-  </footer>
+  <!-- Контакты -->
+  <section>
+    <div class="glass contact">
+      <h2>Связаться</h2>
+      <p>📞 Телефон: <a href="tel:+79039408777">+7 903 940 87 77</a></p>
+      <p>💬 Telegram: <a href="https://t.me/vladissslav42" target="_blank">@vladissslav42</a></p>
+      <p>💬 WhatsApp: <a href="https://wa.me/79039408777" target="_blank">Написать</a></p>
+    </div>
+  </section>
 
-  <!-- Floating CTA -->
-  <div class="cta-floating" data-reveal>
-    <a href="tel:+79039408777" class="px-4 py-3 rounded-full bg-white text-black font-medium ringed shadow-lg">Записаться</a>
-  </div>
+  <!-- CTA -->
+  <a href="https://t.me/vladissslav42" class="cta">Записаться</a>
 
   <script>
-    // ===== DATA =====
-    const appsCommon = [
-      '🗺️ Яндекс.Навигатор с Алисой',
-      '🎵 Яндекс.Музыка',
-      '🎬 Кинопоиск HD',
-      '▶️ YouTube',
-      '🌐 Веб-браузер',
-      '🚫 Антирадар',
-      '📻 Онлайн-радио и IPTV',
-      '🎛️ Эквалайзер',
-      '🛍️ Магазин приложений',
-      '🎞️ ZONA (кинотеатр)'
-    ];
-
-    const catalog = {
-      'Tank': [ { m:'300', p:5000 }, { m:'500', p:5000 }, { m:'700', p:10000 } ],
-      'Wey': [ { m:'07', p:10000 } ],
-      'Lixiang': [ { m:'Уточнить модель', p:null } ],
-      'Changan': [
-        { m:'UNI-K', p:4000 }, { m:'UNI-S', p:4000 }, { m:'UNI-T', p:5000 }, { m:'UNI-V', p:null },
-        { m:'CS55 Plus', p:4000 }, { m:'CS35 Plus', p:4000 }, { m:'CS95', p:null }, { m:'Lamore', p:4000 }, { m:'EADO Plus', p:4000 }
-      ],
-      'Geely': [ { m:'Preface', p:5000 }, { m:'Monjaro', p:5000 }, { m:'Atlas (2G) 2024', p:5000 }, { m:'X50', p:null }, { m:'X70', p:null } ],
-      'Jaecoo': [ { m:'J7', p:5000 }, { m:'J8', p:5000 } ],
-      'Jetour': [ { m:'T2', p:5000 }, { m:'Traveller', p:null }, { m:'Dashing', p:1500 }, { m:'X70 Plus', p:1500 }, { m:'X90 Plus', p:1500 } ],
-      'Chery': [ { m:'Arrizo 8', p:3000 } ],
-      'Haval': [
-        { m:'Jolion', p:1500, note:'приложения или активация DTS' }, { m:'M6', p:3000 }, { m:'M3', p:4000 },
-        { m:'F7 рест', p:null }, { m:'F7x', p:null }, { m:'H3', p:null }, { m:'H9', p:null }, { m:'F7 New', p:10000 }, { m:'Dargo', p:5000 }
-      ],
-      'Omoda': [ { m:'S5', p:5000 }, { m:'C5', p:5000 } ],
-      'BAIC': [ { m:'X7', p:5000 } ],
-      'Exeed': [ { m:'RX', p:5000 } ],
-      'GAC': [ { m:'GS8 (кроме GL)', p:4000 }, { m:'M8', p:4000 } ],
-      'FAW': [ { m:'Bestune B70', p:5000 } ],
-      'BG': [ { m:'X70', p:5000 } ],
+    // ===== Данные =====
+    const carData = {
+      "Tank": {
+        "300": {price:"5000₽", apps:["Навигатор","YouTube","Антирадар"], images:["https://source.unsplash.com/800x500/?suv,black","https://source.unsplash.com/800x500/?suv,interior"]},
+        "500": {price:"5000₽", apps:["YouTube","ZONA","IPTV"], images:["https://source.unsplash.com/800x500/?suv,grey","https://source.unsplash.com/800x500/?suv"]},
+        "700": {price:"10000₽", apps:["Навигатор","Музыка","Кинотеатр"], images:["https://source.unsplash.com/800x500/?luxury,suv","https://source.unsplash.com/800x500/?car"]}
+      },
+      "Haval": {
+        "F7 New": {price:"10000₽", apps:["Навигатор","YouTube","Музыка"], images:["https://source.unsplash.com/800x500/?haval","https://source.unsplash.com/800x500/?haval,interior"]},
+        "Jolion": {price:"1500₽", apps:["Навигатор","Антирадар","IPTV"], images:["https://source.unsplash.com/800x500/?haval,jolion","https://source.unsplash.com/800x500/?car,interior"]}
+      },
+      "Changan": {
+        "UNI-K": {price:"4000₽", apps:["Навигатор","Кинопоиск HD"], images:["https://source.unsplash.com/800x500/?changan","https://source.unsplash.com/800x500/?changan,interior"]},
+        "UNI-T": {price:"5000₽", apps:["YouTube","ZONA","Эквалайзер"], images:["https://source.unsplash.com/800x500/?changan,uni","https://source.unsplash.com/800x500/?changan,suv"]}
+      },
+      "Geely": {
+        "Monjaro": {price:"5000₽", apps:["Навигатор","Музыка"], images:["https://source.unsplash.com/800x500/?geely","https://source.unsplash.com/800x500/?geely,suv"]},
+        "Atlas (2G)": {price:"5000₽", apps:["Навигатор","YouTube"], images:["https://source.unsplash.com/800x500/?geely,atlas","https://source.unsplash.com/800x500/?car,suv"]}
+      }
     };
 
-    // ===== HELPERS =====
-    const money = n => n ? new Intl.NumberFormat('ru-RU').format(n) + ' ₽' : 'Цена по запросу';
+    // ===== Генерация =====
+    const brandsContainer = document.getElementById('brands');
+    for (let brand in carData) {
+      const brandDiv = document.createElement('div');
+      brandDiv.className = 'brand';
+      brandDiv.innerText = brand;
 
-    function makeCarousel(key){
-      const urls = [
-        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',car exterior')}`,
-        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',car interior')}`,
-        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',dashboard')}`,
-      ];
-      const wrap = document.createElement('div'); wrap.className = 'carousel glass ringed';
-      const imgs = urls.map((u,i)=>{
-        const img = document.createElement('img'); img.loading = 'lazy'; img.src = u; img.alt = key; if(i===0) img.classList.add('active'); return img;
+      const modelsDiv = document.createElement('div');
+      modelsDiv.className = 'hidden';
+
+      for (let model in carData[brand]) {
+        const modelDiv = document.createElement('div');
+        modelDiv.className = 'model';
+        modelDiv.innerText = model + ' — ' + carData[brand][model].price;
+
+        const detailsDiv = document.createElement('div');
+        detailsDiv.className = 'hidden';
+
+        // галерея
+        const gallery = document.createElement('div');
+        gallery.className = 'gallery';
+        carData[brand][model].images.forEach(img=>{
+          const image = document.createElement('img');
+          image.src = img;
+          gallery.appendChild(image);
+        });
+
+        // приложения
+        const appsList = document.createElement('ul');
+        carData[brand][model].apps.forEach(app=>{
+          const li = document.createElement('li');
+          li.innerText = '📲 ' + app;
+          appsList.appendChild(li);
+        });
+
+        detailsDiv.appendChild(gallery);
+        detailsDiv.appendChild(appsList);
+
+        modelDiv.addEventListener('click',()=>{
+          detailsDiv.classList.toggle('hidden');
+        });
+
+        modelsDiv.appendChild(modelDiv);
+        modelsDiv.appendChild(detailsDiv);
+      }
+
+      brandDiv.addEventListener('click',()=>{
+        modelsDiv.classList.toggle('hidden');
       });
-      imgs.forEach(img=> wrap.appendChild(img));
-      const prev = document.createElement('button'); prev.className = 'ctrl prev'; prev.textContent = '‹'; prev.setAttribute('aria-label','Назад');
-      const next = document.createElement('button'); next.className = 'ctrl next'; next.textContent = '›'; next.setAttribute('aria-label','Вперёд');
-      const dots = document.createElement('div'); dots.className = 'dots';
-      const dotEls = imgs.map((_,i)=>{ const d=document.createElement('div'); d.className='dot'+(i? '':' active'); dots.appendChild(d); return d; });
-      wrap.append(prev,next,dots);
-      let cur = 0; const show = i=>{ imgs.forEach((im,idx)=> im.classList.toggle('active', idx===i)); dotEls.forEach((d,idx)=> d.classList.toggle('active', idx===i)); };
-      const go = dir=>{ cur=(cur+dir+imgs.length)%imgs.length; show(cur); };
-      prev.addEventListener('click',()=>go(-1)); next.addEventListener('click',()=>go(1));
-      // Swipe
-      let sx=0; wrap.addEventListener('touchstart',e=> sx=e.touches[0].clientX,{passive:true});
-      wrap.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) go(dx<0?1:-1); });
-      return wrap;
+
+      brandsContainer.appendChild(brandDiv);
+      brandsContainer.appendChild(modelsDiv);
     }
-
-    function makeAppsList(){
-      const ul = document.createElement('ul'); ul.className = 'text-sm text-white/80 grid grid-cols-1 gap-1';
-      appsCommon.forEach(a=>{ const li = document.createElement('li'); li.textContent=a; ul.appendChild(li); });
-      return ul;
-    }
-
-    function makeModelItem(brand, model){
-      const acc = document.createElement('div'); acc.className = 'acc glass rounded-2xl p-3 ringed';
-      const btn = document.createElement('button'); btn.className = 'w-full text-left flex items-center justify-between text-sm'; btn.setAttribute('aria-expanded','false');
-      const left = document.createElement('div');
-      left.innerHTML = `<span class=\"font-medium\">${model.m}</span> <span class=\"ml-2 text-white/60\">— ${money(model.p)}</span>${model.note? ` <span class='ml-2 text-[11px] px-2 py-0.5 rounded-full border border-white/15 bg-white/10'>${model.note}</span>`: ''}`;
-      const plus = document.createElement('span'); plus.textContent = '+';
-      btn.append(left, plus);
-      const content = document.createElement('div'); content.className = 'acc-content mt-3 space-y-3';
-      const key = `${brand} ${model.m}`;
-      content.appendChild(makeCarousel(key));
-      const grid = document.createElement('div'); grid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3';
-      const apps = document.createElement('div'); apps.appendChild(makeAppsList());
-      const price = document.createElement('div'); price.className='glass rounded-2xl p-3 ringed'; price.innerHTML = `<div class='text-xs text-white/60 mb-1'>Стоимость</div><div class='text-lg font-semibold'>${money(model.p)}</div><div class='text-xs text-white/60 mt-1'>🔥 Браузер (рутуб, фильмы): 2000 ₽</div>`;
-      grid.append(apps, price); content.appendChild(grid);
-      acc.append(btn, content);
-      btn.addEventListener('click',()=>{ acc.classList.toggle('open'); const expanded = acc.classList.contains('open'); btn.setAttribute('aria-expanded', expanded); if(expanded) acc.scrollIntoView({behavior:'smooth', block:'center'}); });
-      acc.setAttribute('data-reveal','');
-      return acc;
-    }
-
-    function makeBrandBlock(brand, models){
-      const wrap = document.createElement('div'); wrap.className = 'acc glass rounded-3xl p-4 ringed'; wrap.setAttribute('data-reveal','');
-      const head = document.createElement('button'); head.className = 'w-full text-left flex items-center justify-between'; head.setAttribute('aria-expanded','false');
-      head.innerHTML = `<span class='font-medium'>${brand}</span><span>+</span>`;
-      const body = document.createElement('div'); body.className = 'acc-content mt-3 space-y-3';
-      models.forEach(m=> body.appendChild(makeModelItem(brand, m)));
-      wrap.append(head, body);
-      head.addEventListener('click',()=>{ wrap.classList.toggle('open'); const expanded = wrap.classList.contains('open'); head.setAttribute('aria-expanded', expanded); if(expanded) wrap.scrollIntoView({behavior:'smooth', block:'center'}); });
-      return wrap;
-    }
-
-    // Build list (one column)
-    const list = document.getElementById('brandsList');
-    Object.entries(catalog).forEach(([brand, models])=> list.appendChild(makeBrandBlock(brand, models)));
-
-    // Footer year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Reveal on view
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
-    },{ threshold: 0.1 });
-    document.querySelectorAll('[data-reveal]').forEach(el=> io.observe(el));
   </script>
 </body>
 </html>
