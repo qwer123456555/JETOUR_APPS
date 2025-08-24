@@ -1,229 +1,164 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Android Auto: Установка приложений — Быстро • Безопасно • Без вмешательства</title>
-  <meta name="description" content="🔥 NEW: Установка браузера и приложений (рутуб, фильмы) в Android Auto. Без вскрытия авто и пайки. Гарантия сохраняется. Работаю по Москве и удалённо." />
-  <meta property="og:title" content="Android Auto — Быстро • Безопасно • Без вмешательства" />
-  <meta property="og:description" content="Установка браузера и приложений в Android Auto: 15–20 минут, без вмешательства, официально и безопасно. Поддержка популярных марок: Haval, Geely, Changan, Tank, Jetour и др." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚗</text></svg>">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ["Inter", "SF Pro Display", "ui-sans-serif", "system-ui", "-apple-system"] },
-          colors: { base: { 900: "#0a0a0a" }, accent: "#67e8f9" },
-          boxShadow: {
-            glow: "0 0 0 1px rgba(255,255,255,0.06), 0 8px 30px rgba(0,0,0,0.45)",
-            inner: "inset 0 0 0 1px rgba(255,255,255,0.08)",
-          },
-        }
-      }
-    }
-  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Установка приложений в Android Auto</title>
   <style>
-    :root { --glass: rgba(255,255,255,0.06); --border: rgba(255,255,255,0.10); }
-    .glass { background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--border); }
-    .ringed { box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 10px 40px rgba(0,0,0,.45); }
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body,html {height:100%; font-family: 'SF Pro Display', Arial, sans-serif; color:#fff; overflow-x:hidden;}
+    body {background:#000;}
 
-    /* Reveal */
-    [data-reveal] { opacity:0; transform: translateY(16px) scale(.98); transition: opacity .7s ease, transform .7s ease; }
-    [data-reveal].show { opacity:1; transform: translateY(0) scale(1); }
+    /* Видео фон */
+    .video-bg {
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    .overlay {
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      z-index: -1;
+    }
 
-    /* Accordion */
-    .acc-content { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
-    .acc.open > .acc-content { max-height: 2400px; }
+    header {text-align:center; padding:4rem 2rem;}
+    header h1 {font-size:2.5rem; font-weight:600; animation: fadeDown 1s ease;}
+    header p {font-size:1.2rem; margin-top:1rem; animation: fadeDown 1.5s ease;}
 
-    /* Carousel */
-    .carousel { position: relative; border-radius: 16px; overflow: hidden; }
-    .carousel img { width: 100%; height: 220px; object-fit: cover; display: none; }
-    .carousel img.active { display: block; }
-    .carousel .ctrl { position:absolute; top:50%; transform:translateY(-50%); width:36px; height:36px; display:grid; place-items:center; border-radius:999px; background:rgba(0,0,0,.45); color:#fff; }
-    .carousel .prev { left:8px; }
-    .carousel .next { right:8px; }
-    .carousel .dots { position:absolute; bottom:8px; left:0; right:0; display:flex; gap:6px; justify-content:center; }
-    .carousel .dot { width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.45); }
-    .carousel .dot.active { background:#fff; }
+    @keyframes fadeDown {
+      from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);}
+    }
 
-    /* Video bg */
-    .bgvid { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(.35) contrast(1.05) saturate(1.1); }
-    .grad-overlay { position: fixed; inset: 0; z-index: -1; background: radial-gradient(1200px 600px at 50% -10%, rgba(103,232,249,.20), transparent 60%), linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.75)); pointer-events:none; }
+    /* NEW блок */
+    .new-block {
+      max-width:800px; margin:2rem auto; padding:1.5rem;
+      background: rgba(255,255,255,0.1);
+      border-radius:20px; backdrop-filter:blur(10px);
+      text-align:center;
+      animation: fadeUp 1.2s ease;
+    }
+    .new-block h2 {font-size:1.8rem; margin-bottom:1rem; color:#ff5555;}
+    .new-block p {font-size:1.1rem;}
 
-    /* Pretty focus */
-    :focus-visible { outline: 2px solid rgba(103,232,249,.75); outline-offset: 2px; border-radius: 14px; }
+    @keyframes fadeUp {
+      from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);}
+    }
+
+    /* Преимущества */
+    .benefits {display:grid; grid-template-columns:1fr; gap:1rem; max-width:900px; margin:3rem auto; padding:0 1rem;}
+    .benefit {
+      background: rgba(255,255,255,0.08);
+      border-radius:16px; padding:1rem 1.5rem;
+      backdrop-filter:blur(10px);
+      font-size:1.1rem; display:flex; align-items:center; gap:.75rem;
+      animation: fadeUp 1s ease;
+    }
+
+    /* Марки */
+    .brands {max-width:900px; margin:3rem auto; padding:0 1rem;}
+    details {background:rgba(255,255,255,0.08); margin:.6rem 0; border-radius:14px; overflow:hidden;}
+    summary {cursor:pointer; padding:1rem; font-size:1.2rem; font-weight:600;}
+    details[open] summary {background:rgba(255,255,255,0.15);}
+
+    .model {padding:1rem; border-top:1px solid rgba(255,255,255,0.1);}
+    .model h4 {margin-bottom:.5rem;}
+
+    .carousel {position:relative; overflow:hidden; border-radius:12px; margin:1rem 0;}
+    .carousel img {width:100%; display:none; border-radius:12px;}
+    .carousel img.active {display:block;}
+    .carousel button {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(0,0,0,0.5); border:none; color:#fff;
+      font-size:1.5rem; padding:.3rem .7rem; cursor:pointer;
+      border-radius:50%;
+    }
+    .carousel .prev {left:10px;}
+    .carousel .next {right:10px;}
+
+    /* Контакты */
+    .contacts {text-align:center; margin:3rem auto;}
+    .contacts h3 {margin-bottom:1rem;}
+    .contacts p {margin:.3rem 0;}
+
+    /* Fixed кнопка */
+    .cta-btn {
+      position:fixed; bottom:20px; right:20px;
+      background:#ff5555; color:#fff; border:none; border-radius:50px;
+      padding:.9rem 1.5rem; font-size:1rem; cursor:pointer;
+      box-shadow:0 4px 20px rgba(0,0,0,0.4);
+      transition:.3s;
+    }
+    .cta-btn:hover {background:#ff3333;}
+
   </style>
 </head>
-<body class="bg-base-900 text-white font-sans selection:bg-accent/30 selection:text-white">
-  <!-- Background video + overlay -->
-  <video class="bgvid" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop">
-    <source src="https://cdn.coverr.co/videos/coverr-driving-on-a-highway-1695/1080p.mp4" type="video/mp4">
+<body>
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="https://cdn.coverr.co/videos/coverr-driving-a-car-through-the-city-1639/1080p.mp4" type="video/mp4">
   </video>
-  <div class="grad-overlay"></div>
+  <div class="overlay"></div>
 
-  <!-- Header -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-black/30 border-b border-white/10">
-    <div class="max-w-screen-md mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-2xl glass grid place-items-center ringed">🚗</div>
-        <span class="text-sm tracking-wide text-white/80">Android Auto • Install</span>
-      </div>
-      <a href="#contact" class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-sm hover:bg-white/15 transition">Записаться</a>
-    </div>
+  <header>
+    <h1>Установка приложений в Android Auto</h1>
+    <p>Быстро • Безопасно • Без вмешательства</p>
   </header>
 
-  <!-- Hero -->
-  <section class="max-w-screen-md mx-auto px-4 pt-10 pb-6">
-    <div class="glass rounded-3xl p-6 ringed" data-reveal>
-      <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-2">Быстро • Безопасно • Без вмешательства</p>
-      <h1 class="text-3xl font-semibold mb-3">Установка приложений в <span class="text-cyan-300">Android Auto</span></h1>
-      <p class="text-white/80">🔥 NEW: установка браузера (рутуб, фильмы) — <b>2000 ₽</b>. Без вскрытия авто и пайки. Гарантия сохраняется. Установка 15–20 минут. Можно удалить без следов.</p>
-    </div>
+  <section class="new-block">
+    <h2>🔥 NEW</h2>
+    <p>Установка браузера (рутуб, фильмы) в Android Auto на любое авто — всего 2000 ₽</p>
   </section>
 
-  <!-- Brands (one column) → Models → Details -->
-  <section id="cars" class="max-w-screen-md mx-auto px-4">
-    <h2 class="text-2xl font-semibold mb-4" data-reveal>Поддерживаемые авто</h2>
-    <div id="brandsList" class="space-y-3"></div>
-    <p class="text-white/70 text-sm mt-3">Если вашей модели нет в списке — напишите, проверю совместимость.</p>
+  <section class="benefits">
+    <div class="benefit">⏱️ Время установки — 15–20 минут</div>
+    <div class="benefit">✅ Гарантия сохраняется — официально и безопасно</div>
+    <div class="benefit">🔧 Без вскрытия авто и пайки — никакого вмешательства</div>
+    <div class="benefit">📍 Работаю удалённо или с выездом по Москве</div>
+    <div class="benefit">✨ Удаление приложений без следов в любой момент</div>
+    <div class="benefit">🚀 Дополнительно: обновления и поддержка 24/7</div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="max-w-screen-md mx-auto px-4 mt-10 mb-16">
-    <div class="glass rounded-3xl p-6 ringed text-center" data-reveal>
-      <h2 class="text-2xl font-semibold mb-2">Связаться</h2>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="tel:+79039408777" class="px-5 py-3 rounded-2xl bg-white text-black font-medium hover:opacity-90 transition">📞 +7 903 940 87 77</a>
-        <a href="https://t.me/vladissslav42" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition">Telegram: @vladissslav42</a>
-        <a href="https://wa.me/79039408777" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition">WhatsApp</a>
+  <section class="brands">
+    <details>
+      <summary>Tank</summary>
+      <div class="model">
+        <h4>Tank 300 — 5000₽</h4>
+        <div class="carousel">
+          <img src="https://source.unsplash.com/800x500/?tank-car" class="active">
+          <img src="https://source.unsplash.com/801x501/?suv">
+          <button class="prev">‹</button>
+          <button class="next">›</button>
+        </div>
+        <p>Приложения: Яндекс.Навигатор, YouTube, Кинопоиск HD, ZONA, музыка, радио.</p>
       </div>
-      <p class="text-xs text-white/60 mt-4">Работаю удалённо или с выездом по Москве</p>
-    </div>
+    </details>
+    <!-- Остальные марки и модели вставляются аналогично -->
   </section>
 
-  <footer class="max-w-screen-md mx-auto px-4 pb-10 text-center text-white/50 text-xs">
-    <p>© <span id="y"></span> Android Auto • Установка приложений. Не является продукцией Google/Apple/брендов авто.</p>
-  </footer>
+  <section class="contacts">
+    <h3>Связаться</h3>
+    <p>📞 +7 903 940 8777</p>
+    <p>✈️ Telegram: @vladissslav42</p>
+    <p>💬 WhatsApp: +7 903 940 8777</p>
+  </section>
+
+  <button class="cta-btn">Записаться</button>
 
   <script>
-    // ===== DATA =====
-    const appsCommon = [
-      '🗺️ Яндекс.Навигатор с Алисой',
-      '🎵 Яндекс.Музыка',
-      '🎬 Кинопоиск HD',
-      '▶️ YouTube',
-      '🌐 Веб-браузер',
-      '🚫 Антирадар',
-      '📻 Онлайн-радио и IPTV',
-      '🎛️ Эквалайзер',
-      '🛍️ Магазин приложений',
-      '🎞️ ZONA (кинотеатр)'
-    ];
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      let imgs = carousel.querySelectorAll('img');
+      let index = 0;
+      let prev = carousel.querySelector('.prev');
+      let next = carousel.querySelector('.next');
 
-    const catalog = {
-      'Tank': [ { m:'300', p:5000 }, { m:'500', p:5000 }, { m:'700', p:10000 } ],
-      'Wey': [ { m:'07', p:10000 } ],
-      'Lixiang': [ { m:'Уточнить модель', p:null } ],
-      'Changan': [
-        { m:'UNI-K', p:4000 }, { m:'UNI-S', p:4000 }, { m:'UNI-T', p:5000 }, { m:'UNI-V', p:null },
-        { m:'CS55 Plus', p:4000 }, { m:'CS35 Plus', p:4000 }, { m:'CS95', p:null }, { m:'Lamore', p:4000 }, { m:'EADO Plus', p:4000 }
-      ],
-      'Geely': [ { m:'Preface', p:5000 }, { m:'Monjaro', p:5000 }, { m:'Atlas (2G) 2024', p:5000 }, { m:'X50', p:null }, { m:'X70', p:null } ],
-      'Jaecoo': [ { m:'J7', p:5000 }, { m:'J8', p:5000 } ],
-      'Jetour': [ { m:'T2', p:5000 }, { m:'Traveller', p:null }, { m:'Dashing', p:1500 }, { m:'X70 Plus', p:1500 }, { m:'X90 Plus', p:1500 } ],
-      'Chery': [ { m:'Arrizo 8', p:3000 } ],
-      'Haval': [
-        { m:'Jolion', p:1500, note:'приложения или активация DTS' }, { m:'M6', p:3000 }, { m:'M3', p:4000 },
-        { m:'F7 рест', p:null }, { m:'F7x', p:null }, { m:'H3', p:null }, { m:'H9', p:null }, { m:'F7 New', p:10000 }, { m:'Dargo', p:5000 }
-      ],
-      'Omoda': [ { m:'S5', p:5000 }, { m:'C5', p:5000 } ],
-      'BAIC': [ { m:'X7', p:5000 } ],
-      'Exeed': [ { m:'RX', p:5000 } ],
-      'GAC': [ { m:'GS8 (кроме GL)', p:4000 }, { m:'M8', p:4000 } ],
-      'FAW': [ { m:'Bestune B70', p:5000 } ],
-      'BG': [ { m:'X70', p:5000 } ],
-    };
-
-    // ===== HELPERS =====
-    const money = n => n ? new Intl.NumberFormat('ru-RU').format(n) + ' ₽' : 'Цена по запросу';
-
-    function makeCarousel(key){
-      const urls = [
-        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',car exterior')}`,
-        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',car interior')}`,
-        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',dashboard')}`,
-      ];
-      const wrap = document.createElement('div'); wrap.className = 'carousel glass ringed';
-      const imgs = urls.map((u,i)=>{
-        const img = document.createElement('img'); img.src = u; img.alt = key; if(i===0) img.classList.add('active'); return img;
-      });
-      imgs.forEach(img=> wrap.appendChild(img));
-      const prev = document.createElement('button'); prev.className = 'ctrl prev'; prev.textContent = '‹'; prev.setAttribute('aria-label','Назад');
-      const next = document.createElement('button'); next.className = 'ctrl next'; next.textContent = '›'; next.setAttribute('aria-label','Вперёд');
-      const dots = document.createElement('div'); dots.className = 'dots';
-      const dotEls = imgs.map((_,i)=>{ const d=document.createElement('div'); d.className='dot'+(i? '':' active'); dots.appendChild(d); return d; });
-      wrap.append(prev,next,dots);
-      let cur = 0; const show = i=>{ imgs.forEach((im,idx)=> im.classList.toggle('active', idx===i)); dotEls.forEach((d,idx)=> d.classList.toggle('active', idx===i)); };
-      const go = dir=>{ cur=(cur+dir+imgs.length)%imgs.length; show(cur); };
-      prev.addEventListener('click',()=>go(-1)); next.addEventListener('click',()=>go(1));
-      // Swipe
-      let sx=0; wrap.addEventListener('touchstart',e=> sx=e.touches[0].clientX,{passive:true});
-      wrap.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) go(dx<0?1:-1); });
-      return wrap;
-    }
-
-    function makeAppsList(){
-      const ul = document.createElement('ul'); ul.className = 'text-sm text-white/80 grid grid-cols-1 gap-1';
-      appsCommon.forEach(a=>{ const li = document.createElement('li'); li.textContent=a; ul.appendChild(li); });
-      return ul;
-    }
-
-    function makeModelItem(brand, model){
-      const acc = document.createElement('div'); acc.className = 'acc glass rounded-2xl p-3 ringed';
-      const btn = document.createElement('button'); btn.className = 'w-full text-left flex items-center justify-between text-sm'; btn.setAttribute('aria-expanded','false');
-      const left = document.createElement('div');
-      left.innerHTML = `<span class="font-medium">${model.m}</span> <span class="ml-2 text-white/60">— ${money(model.p)}</span>${model.note? ` <span class='ml-2 text-[11px] px-2 py-0.5 rounded-full border border-white/15 bg-white/10'>${model.note}</span>`: ''}`;
-      const plus = document.createElement('span'); plus.textContent = '+';
-      btn.append(left, plus);
-      const content = document.createElement('div'); content.className = 'acc-content mt-3 space-y-3';
-      const key = `${brand} ${model.m}`;
-      content.appendChild(makeCarousel(key));
-      const grid = document.createElement('div'); grid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3';
-      const apps = document.createElement('div'); apps.appendChild(makeAppsList());
-      const price = document.createElement('div'); price.className='glass rounded-2xl p-3 ringed'; price.innerHTML = `<div class='text-xs text-white/60 mb-1'>Стоимость</div><div class='text-lg font-semibold'>${money(model.p)}</div><div class='text-xs text-white/60 mt-1'>🔥 Браузер (рутуб, фильмы): 2000 ₽</div>`;
-      grid.append(apps, price); content.appendChild(grid);
-      acc.append(btn, content);
-      btn.addEventListener('click',()=>{ acc.classList.toggle('open'); const expanded = acc.classList.contains('open'); btn.setAttribute('aria-expanded', expanded); });
-      acc.setAttribute('data-reveal','');
-      return acc;
-    }
-
-    function makeBrandBlock(brand, models){
-      const wrap = document.createElement('div'); wrap.className = 'acc glass rounded-3xl p-4 ringed'; wrap.setAttribute('data-reveal','');
-      const head = document.createElement('button'); head.className = 'w-full text-left flex items-center justify-between'; head.setAttribute('aria-expanded','false');
-      head.innerHTML = `<span class='font-medium'>${brand}</span><span>+</span>`;
-      const body = document.createElement('div'); body.className = 'acc-content mt-3 space-y-3';
-      models.forEach(m=> body.appendChild(makeModelItem(brand, m)));
-      wrap.append(head, body);
-      head.addEventListener('click',()=>{ wrap.classList.toggle('open'); const expanded = wrap.classList.contains('open'); head.setAttribute('aria-expanded', expanded); });
-      return wrap;
-    }
-
-    // Build list (one column)
-    const list = document.getElementById('brandsList');
-    Object.entries(catalog).forEach(([brand, models])=> list.appendChild(makeBrandBlock(brand, models)));
-
-    // Footer year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Reveal on view
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
-    },{ threshold: 0.1 });
-    document.querySelectorAll('[data-reveal]').forEach(el=> io.observe(el));
+      function show(i){
+        imgs.forEach((img,idx)=> img.classList.toggle('active', idx===i));
+      }
+      prev.onclick = ()=>{index=(index-1+imgs.length)%imgs.length; show(index)}
+      next.onclick = ()=>{index=(index+1)%imgs.length; show(index)}
+    });
   </script>
 </body>
 </html>
