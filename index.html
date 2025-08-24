@@ -15,14 +15,8 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ["Inter", "SF Pro Display", "SF Pro Text", "ui-sans-serif", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Helvetica Neue", "Arial"]
-          },
-          colors: {
-            base: { 900: "#0b0b0c" },
-            glass: "rgba(255,255,255,0.06)",
-            accent: "#67e8f9",
-          },
+          fontFamily: { sans: ["Inter", "SF Pro Display", "ui-sans-serif", "system-ui", "-apple-system"] },
+          colors: { base: { 900: "#0b0b0c" }, glass: "rgba(255,255,255,0.06)", accent: "#67e8f9" },
           boxShadow: { glow: "0 0 0 1px rgba(255,255,255,0.06), 0 8px 30px rgba(0,0,0,0.35)" },
         }
       }
@@ -31,14 +25,16 @@
   <style>
     .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
     .accordion-content { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
-    .accordion.open > .accordion-content { max-height: 2000px; }
-    .carousel { position: relative; }
-    .carousel img { width: 100%; border-radius: 12px; }
-    .carousel-controls { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); }
-    .carousel-controls button { background: rgba(0,0,0,0.4); color: white; border-radius: 50%; width: 32px; height: 32px; }
+    .accordion.open > .accordion-content { max-height: 2400px; }
+    .carousel { position: relative; border-radius: 12px; overflow: hidden; }
+    .carousel img { width: 100%; display: none; }
+    .carousel img.active { display: block; }
+    .carousel-controls { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 6px; }
+    .carousel-controls button { background: rgba(0,0,0,0.5); color: white; border-radius: 999px; width: 36px; height: 36px; display: grid; place-items: center; }
+    .tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.08) }
   </style>
 </head>
-<body class="bg-base-900 text-white font-sans">
+<body class="bg-base-900 text-white font-sans selection:bg-accent/30 selection:text-white">
   <header class="sticky top-0 z-40 backdrop-blur-md bg-black/30 border-b border-white/10">
     <div class="max-w-screen-md mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -52,88 +48,172 @@
   <!-- Hero -->
   <section class="max-w-screen-md mx-auto px-4 py-10">
     <div class="glass rounded-3xl p-6 shadow-glow">
+      <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-2">Быстро • Безопасно • Без вмешательства</p>
       <h1 class="text-3xl font-semibold mb-3">Установка приложений в <span class="text-cyan-300">Android Auto</span></h1>
-      <p class="text-white/80">🔥 NEW: установка браузера (рутуб, фильмы) — <b>2000 ₽</b>. Без вскрытия авто и пайки. Гарантия сохраняется. Установка 15–20 минут.</p>
+      <p class="text-white/80">🔥 NEW: установка браузера (рутуб, фильмы) — <b>2000 ₽</b>. Без вскрытия авто и пайки. Гарантия сохраняется. Установка 15–20 минут. Можно удалить без следов.</p>
     </div>
   </section>
 
-  <!-- Cars and Models -->
-  <section id="cars" class="max-w-screen-md mx-auto px-4 mt-8">
+  <!-- Brands → Models → Details -->
+  <section id="cars" class="max-w-screen-md mx-auto px-4 mt-2">
     <h2 class="text-2xl font-semibold mb-4">Поддерживаемые авто</h2>
-    <div class="grid grid-cols-2 gap-3">
-      <div class="glass rounded-2xl p-4 shadow-glow accordion">
-        <button class="w-full text-left flex justify-between" data-acc>
-          <span class="font-medium">Haval</span><span>+</span>
-        </button>
-        <div class="accordion-content mt-3 pl-3 space-y-3">
-          <div class="accordion">
-            <button class="w-full text-left flex justify-between text-sm" data-acc>
-              <span>F7 New — 10 000 ₽</span><span>+</span>
-            </button>
-            <div class="accordion-content mt-2 space-y-2">
-              <div class="carousel">
-                <img src="https://source.unsplash.com/featured/?Haval%20F7" alt="Haval F7" />
-              </div>
-              <ul class="text-sm text-white/80">
-                <li>🗺️ Яндекс.Навигатор</li>
-                <li>🎬 Кинопоиск HD</li>
-                <li>▶️ YouTube</li>
-              </ul>
-              <p class="text-sm mt-2">Цена: 10 000 ₽</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass rounded-2xl p-4 shadow-glow accordion">
-        <button class="w-full text-left flex justify-between" data-acc>
-          <span class="font-medium">Tank</span><span>+</span>
-        </button>
-        <div class="accordion-content mt-3 pl-3 space-y-3">
-          <div class="accordion">
-            <button class="w-full text-left flex justify-between text-sm" data-acc>
-              <span>Tank 700 — 10 000 ₽</span><span>+</span>
-            </button>
-            <div class="accordion-content mt-2 space-y-2">
-              <div class="carousel">
-                <img src="https://source.unsplash.com/featured/?Tank%20700%20car" alt="Tank 700" />
-              </div>
-              <ul class="text-sm text-white/80">
-                <li>🌐 Браузер</li>
-                <li>🎵 Яндекс.Музыка</li>
-                <li>📻 Онлайн-радио</li>
-              </ul>
-              <p class="text-sm mt-2">Цена: 10 000 ₽</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="brandsGrid" class="grid grid-cols-2 gap-3"></div>
+    <p class="text-white/60 text-sm mt-3">Если вашей модели нет в списке — напишите, проверю совместимость.</p>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="max-w-screen-md mx-auto px-4 mt-12 mb-16">
+  <section id="contact" class="max-w-screen-md mx-auto px-4 mt-10 mb-16">
     <div class="glass rounded-3xl p-6 shadow-glow text-center">
       <h2 class="text-2xl font-semibold mb-2">Связаться</h2>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
         <a href="tel:+79039408777" class="px-5 py-3 rounded-2xl bg-white text-black font-medium">📞 +7 903 940 87 77</a>
-        <a href="https://t.me/vladissslav42" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10">Telegram</a>
+        <a href="https://t.me/vladissslav42" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10">Telegram: @vladissslav42</a>
         <a href="https://wa.me/79039408777" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10">WhatsApp</a>
       </div>
+      <p class="text-xs text-white/60 mt-4">Работаю удалённо или с выездом по Москве</p>
     </div>
   </section>
 
   <footer class="max-w-screen-md mx-auto px-4 pb-10 text-center text-white/50 text-xs">
-    <p>© <span id="y"></span> Android Auto • Установка приложений.</p>
+    <p>© <span id="y"></span> Android Auto • Установка приложений. Не является продукцией Google/Apple/брендов авто.</p>
   </footer>
 
   <script>
-    document.querySelectorAll('[data-acc]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const wrap = btn.parentElement;
-        wrap.classList.toggle('open');
+    const appsCommon = [
+      '🗺️ Яндекс.Навигатор с Алисой',
+      '🎵 Яндекс.Музыка',
+      '🎬 Кинопоиск HD',
+      '▶️ YouTube',
+      '🌐 Веб-браузер',
+      '🚫 Антирадар',
+      '📻 Онлайн-радио и IPTV',
+      '🎛️ Эквалайзер',
+      '🛍️ Магазин приложений',
+      '🎞️ ZONA (кинотеатр)'
+    ];
+
+    // Прайс и модели (рандомные фото с Unsplash по ключу)
+    const catalog = {
+      'Tank': [
+        { m: '300', p: 5000 },
+        { m: '500', p: 5000 },
+        { m: '700', p: 10000 }
+      ],
+      'Wey': [ { m: '07', p: 10000 } ],
+      'Lixiang': [ { m: 'Уточнить модель', p: null } ],
+      'Changan': [
+        { m: 'UNI-K', p: 4000 },
+        { m: 'UNI-S', p: 4000 },
+        { m: 'UNI-T', p: 5000 },
+        { m: 'UNI-V', p: null },
+        { m: 'CS55 Plus', p: 4000 },
+        { m: 'CS35 Plus', p: 4000 },
+        { m: 'CS95', p: null },
+        { m: 'Lamore', p: 4000 },
+        { m: 'EADO Plus', p: 4000 }
+      ],
+      'Geely': [
+        { m: 'Preface', p: 5000 },
+        { m: 'Monjaro', p: 5000 },
+        { m: 'Atlas (2G) 2024', p: 5000 },
+        { m: 'X50', p: null },
+        { m: 'X70', p: null }
+      ],
+      'Jaecoo': [ { m: 'J7', p: 5000 }, { m: 'J8', p: 5000 } ],
+      'Jetour': [
+        { m: 'T2', p: 5000 },
+        { m: 'Traveller', p: null },
+        { m: 'Dashing', p: 1500 },
+        { m: 'X70 Plus', p: 1500 },
+        { m: 'X90 Plus', p: 1500 }
+      ],
+      'Chery': [ { m: 'Arrizo 8', p: 3000 } ],
+      'Haval': [
+        { m: 'Jolion', p: 1500, note: 'приложения или активация DTS' },
+        { m: 'M6', p: 3000 },
+        { m: 'M3', p: 4000 },
+        { m: 'F7 рест', p: null },
+        { m: 'F7x', p: null },
+        { m: 'H3', p: null },
+        { m: 'H9', p: null },
+        { m: 'F7 New', p: 10000 },
+        { m: 'Dargo', p: 5000 }
+      ],
+      'Omoda': [ { m: 'S5', p: 5000 }, { m: 'C5', p: 5000 } ],
+      'BAIC': [ { m: 'X7', p: 5000 } ],
+      'Exeed': [ { m: 'RX', p: 5000 } ],
+      'GAC': [ { m: 'GS8 (кроме GL)', p: 4000 }, { m: 'M8', p: 4000 } ],
+      'FAW': [ { m: 'Bestune B70', p: 5000 } ],
+      'BG': [ { m: 'X70', p: 5000 } ],
+    };
+
+    function money(n){ return n? new Intl.NumberFormat('ru-RU').format(n) + ' ₽' : 'Цена по запросу'; }
+
+    function makeCarousel(key){
+      const urls = [
+        `https://source.unsplash.com/800x600/?${encodeURIComponent(key+',car exterior')}`,
+        `https://source.unsplash.com/800x600/?${encodeURIComponent(key+',car interior')}`,
+        `https://source.unsplash.com/800x600/?${encodeURIComponent(key+',dashboard')}`,
+      ];
+      const wrap = document.createElement('div');
+      wrap.className = 'carousel';
+      urls.forEach((u,i)=>{
+        const img = document.createElement('img');
+        img.src = u; img.alt = key; if(i===0) img.classList.add('active');
+        wrap.appendChild(img);
       });
-    });
+      const ctr = document.createElement('div');
+      ctr.className = 'carousel-controls';
+      const prev = Object.assign(document.createElement('button'), { innerText: '‹', className: 'prev' });
+      const next = Object.assign(document.createElement('button'), { innerText: '›', className: 'next' });
+      ctr.append(prev, next); wrap.appendChild(ctr);
+      let cur = 0; const imgs = ()=> wrap.querySelectorAll('img');
+      const show = i => imgs().forEach((im,idx)=> im.classList.toggle('active', idx===i));
+      prev.addEventListener('click', ()=>{ cur=(cur-1+imgs().length)%imgs().length; show(cur);});
+      next.addEventListener('click', ()=>{ cur=(cur+1)%imgs().length; show(cur);});
+      return wrap;
+    }
+
+    function makeAppsList(){
+      const ul = document.createElement('ul');
+      ul.className = 'text-sm text-white/80 grid grid-cols-1 gap-1';
+      appsCommon.forEach(a=>{ const li = document.createElement('li'); li.textContent=a; ul.appendChild(li); });
+      return ul;
+    }
+
+    function makeModelItem(brand, model){
+      const acc = document.createElement('div'); acc.className = 'accordion glass rounded-xl p-3';
+      const btn = document.createElement('button'); btn.className = 'w-full text-left flex items-center justify-between text-sm';
+      const left = document.createElement('div');
+      left.innerHTML = `<span class="font-medium">${model.m}</span> <span class="ml-2 text-white/60">— ${money(model.p)}</span>${model.note? ` <span class='tag ml-2'>${model.note}</span>`: ''}`;
+      const plus = document.createElement('span'); plus.textContent = '+';
+      btn.append(left, plus); btn.setAttribute('data-acc','');
+      const content = document.createElement('div'); content.className = 'accordion-content mt-2 space-y-3';
+      const key = `${brand} ${model.m}`;
+      content.appendChild(makeCarousel(key));
+      const sub = document.createElement('div'); sub.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3';
+      const apps = document.createElement('div'); apps.appendChild(makeAppsList());
+      const price = document.createElement('div'); price.innerHTML = `<div class='glass rounded-xl p-3'><div class='text-xs text-white/60 mb-1'>Стоимость</div><div class='text-lg font-semibold'>${money(model.p)}</div><div class='text-xs text-white/60 mt-1'>🔥 Браузер (рутуб, фильмы): 2000 ₽</div></div>`;
+      sub.append(apps, price); content.appendChild(sub);
+      acc.append(btn, content);
+      btn.addEventListener('click', ()=> acc.classList.toggle('open'));
+      return acc;
+    }
+
+    function makeBrandCard(brand, models){
+      const card = document.createElement('div'); card.className = 'glass rounded-2xl p-4 shadow-glow accordion';
+      const head = document.createElement('button'); head.className = 'w-full text-left flex items-center justify-between'; head.setAttribute('data-acc','');
+      head.innerHTML = `<span class='font-medium'>${brand}</span><span>+</span>`;
+      const body = document.createElement('div'); body.className = 'accordion-content mt-3 pl-1 space-y-2';
+      models.forEach(m=> body.appendChild(makeModelItem(brand, m)));
+      card.append(head, body);
+      head.addEventListener('click', ()=> card.classList.toggle('open'));
+      return card;
+    }
+
+    const grid = document.getElementById('brandsGrid');
+    Object.entries(catalog).forEach(([brand, models])=> grid.appendChild(makeBrandCard(brand, models)));
+
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
