@@ -11,59 +11,94 @@
   <meta name="theme-color" content="#0a0a0a" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚗</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/scrollreveal"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "SF Pro Display", "ui-sans-serif", "system-ui", "-apple-system"] },
+          colors: { base: { 900: "#0a0a0a" }, accent: "#67e8f9" },
+          boxShadow: {
+            glow: "0 0 0 1px rgba(255,255,255,0.06), 0 8px 30px rgba(0,0,0,0.45)",
+            inner: "inset 0 0 0 1px rgba(255,255,255,0.08)",
+          },
+        }
+      }
+    }
+  </script>
   <style>
-    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
-    .accordion-content { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
-    .accordion.open > .accordion-content { max-height: 2400px; }
-    .carousel { position: relative; border-radius: 12px; overflow: hidden; }
-    .carousel img { width: 100%; display: none; }
+    :root { --glass: rgba(255,255,255,0.06); --border: rgba(255,255,255,0.10); }
+    .glass { background: var(--glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid var(--border); }
+    .ringed { box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 10px 40px rgba(0,0,0,.45); }
+
+    /* Reveal */
+    [data-reveal] { opacity:0; transform: translateY(16px) scale(.98); transition: opacity .7s ease, transform .7s ease; }
+    [data-reveal].show { opacity:1; transform: translateY(0) scale(1); }
+
+    /* Accordion */
+    .acc-content { max-height: 0; overflow: hidden; transition: max-height .5s ease; }
+    .acc.open > .acc-content { max-height: 2400px; }
+
+    /* Carousel */
+    .carousel { position: relative; border-radius: 16px; overflow: hidden; }
+    .carousel img { width: 100%; height: 220px; object-fit: cover; display: none; }
     .carousel img.active { display: block; }
-    .carousel-controls { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); padding: 0 6px; }
-    .carousel-controls button { background: rgba(0,0,0,0.5); color: white; border-radius: 999px; width: 36px; height: 36px; display: grid; place-items: center; }
-    .tag { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.08) }
-    video.bgvid { position: fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; filter: brightness(.35); }
+    .carousel .ctrl { position:absolute; top:50%; transform:translateY(-50%); width:36px; height:36px; display:grid; place-items:center; border-radius:999px; background:rgba(0,0,0,.45); color:#fff; }
+    .carousel .prev { left:8px; }
+    .carousel .next { right:8px; }
+    .carousel .dots { position:absolute; bottom:8px; left:0; right:0; display:flex; gap:6px; justify-content:center; }
+    .carousel .dot { width:6px; height:6px; border-radius:999px; background:rgba(255,255,255,.45); }
+    .carousel .dot.active { background:#fff; }
+
+    /* Video bg */
+    .bgvid { position: fixed; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; filter: brightness(.35) contrast(1.05) saturate(1.1); }
+    .grad-overlay { position: fixed; inset: 0; z-index: -1; background: radial-gradient(1200px 600px at 50% -10%, rgba(103,232,249,.20), transparent 60%), linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.75)); pointer-events:none; }
+
+    /* Pretty focus */
+    :focus-visible { outline: 2px solid rgba(103,232,249,.75); outline-offset: 2px; border-radius: 14px; }
   </style>
 </head>
 <body class="bg-base-900 text-white font-sans selection:bg-accent/30 selection:text-white">
-  <video class="bgvid" autoplay muted loop playsinline>
+  <!-- Background video + overlay -->
+  <video class="bgvid" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=1200&auto=format&fit=crop">
     <source src="https://cdn.coverr.co/videos/coverr-driving-on-a-highway-1695/1080p.mp4" type="video/mp4">
   </video>
+  <div class="grad-overlay"></div>
 
+  <!-- Header -->
   <header class="sticky top-0 z-40 backdrop-blur-md bg-black/30 border-b border-white/10">
     <div class="max-w-screen-md mx-auto px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-2xl glass grid place-items-center shadow-glow">🚗</div>
+        <div class="w-8 h-8 rounded-2xl glass grid place-items-center ringed">🚗</div>
         <span class="text-sm tracking-wide text-white/80">Android Auto • Install</span>
       </div>
-      <a href="#contact" class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-sm">Записаться</a>
+      <a href="#contact" class="px-3 py-1.5 rounded-xl bg-white/10 border border-white/10 text-sm hover:bg-white/15 transition">Записаться</a>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="max-w-screen-md mx-auto px-4 py-10">
-    <div class="glass rounded-3xl p-6 shadow-glow" data-sr>
+  <section class="max-w-screen-md mx-auto px-4 pt-10 pb-6">
+    <div class="glass rounded-3xl p-6 ringed" data-reveal>
       <p class="text-xs uppercase tracking-[0.25em] text-white/60 mb-2">Быстро • Безопасно • Без вмешательства</p>
       <h1 class="text-3xl font-semibold mb-3">Установка приложений в <span class="text-cyan-300">Android Auto</span></h1>
       <p class="text-white/80">🔥 NEW: установка браузера (рутуб, фильмы) — <b>2000 ₽</b>. Без вскрытия авто и пайки. Гарантия сохраняется. Установка 15–20 минут. Можно удалить без следов.</p>
     </div>
   </section>
 
-  <!-- Brands → Models → Details -->
-  <section id="cars" class="max-w-screen-md mx-auto px-4 mt-2">
-    <h2 class="text-2xl font-semibold mb-4" data-sr>Поддерживаемые авто</h2>
-    <div id="brandsGrid" class="grid grid-cols-2 gap-3"></div>
-    <p class="text-white/60 text-sm mt-3">Если вашей модели нет в списке — напишите, проверю совместимость.</p>
+  <!-- Brands (one column) → Models → Details -->
+  <section id="cars" class="max-w-screen-md mx-auto px-4">
+    <h2 class="text-2xl font-semibold mb-4" data-reveal>Поддерживаемые авто</h2>
+    <div id="brandsList" class="space-y-3"></div>
+    <p class="text-white/70 text-sm mt-3">Если вашей модели нет в списке — напишите, проверю совместимость.</p>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="max-w-screen-md mx-auto px-4 mt-10 mb-16">
-    <div class="glass rounded-3xl p-6 shadow-glow text-center" data-sr>
+    <div class="glass rounded-3xl p-6 ringed text-center" data-reveal>
       <h2 class="text-2xl font-semibold mb-2">Связаться</h2>
       <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="tel:+79039408777" class="px-5 py-3 rounded-2xl bg-white text-black font-medium">📞 +7 903 940 87 77</a>
-        <a href="https://t.me/vladissslav42" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10">Telegram: @vladissslav42</a>
-        <a href="https://wa.me/79039408777" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10">WhatsApp</a>
+        <a href="tel:+79039408777" class="px-5 py-3 rounded-2xl bg-white text-black font-medium hover:opacity-90 transition">📞 +7 903 940 87 77</a>
+        <a href="https://t.me/vladissslav42" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition">Telegram: @vladissslav42</a>
+        <a href="https://wa.me/79039408777" target="_blank" class="px-5 py-3 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition">WhatsApp</a>
       </div>
       <p class="text-xs text-white/60 mt-4">Работаю удалённо или с выездом по Москве</p>
     </div>
@@ -74,6 +109,7 @@
   </footer>
 
   <script>
+    // ===== DATA =====
     const appsCommon = [
       '🗺️ Яндекс.Навигатор с Алисой',
       '🎵 Яндекс.Музыка',
@@ -87,78 +123,107 @@
       '🎞️ ZONA (кинотеатр)'
     ];
 
-    const catalog = {/* тот же список моделей как раньше */};
+    const catalog = {
+      'Tank': [ { m:'300', p:5000 }, { m:'500', p:5000 }, { m:'700', p:10000 } ],
+      'Wey': [ { m:'07', p:10000 } ],
+      'Lixiang': [ { m:'Уточнить модель', p:null } ],
+      'Changan': [
+        { m:'UNI-K', p:4000 }, { m:'UNI-S', p:4000 }, { m:'UNI-T', p:5000 }, { m:'UNI-V', p:null },
+        { m:'CS55 Plus', p:4000 }, { m:'CS35 Plus', p:4000 }, { m:'CS95', p:null }, { m:'Lamore', p:4000 }, { m:'EADO Plus', p:4000 }
+      ],
+      'Geely': [ { m:'Preface', p:5000 }, { m:'Monjaro', p:5000 }, { m:'Atlas (2G) 2024', p:5000 }, { m:'X50', p:null }, { m:'X70', p:null } ],
+      'Jaecoo': [ { m:'J7', p:5000 }, { m:'J8', p:5000 } ],
+      'Jetour': [ { m:'T2', p:5000 }, { m:'Traveller', p:null }, { m:'Dashing', p:1500 }, { m:'X70 Plus', p:1500 }, { m:'X90 Plus', p:1500 } ],
+      'Chery': [ { m:'Arrizo 8', p:3000 } ],
+      'Haval': [
+        { m:'Jolion', p:1500, note:'приложения или активация DTS' }, { m:'M6', p:3000 }, { m:'M3', p:4000 },
+        { m:'F7 рест', p:null }, { m:'F7x', p:null }, { m:'H3', p:null }, { m:'H9', p:null }, { m:'F7 New', p:10000 }, { m:'Dargo', p:5000 }
+      ],
+      'Omoda': [ { m:'S5', p:5000 }, { m:'C5', p:5000 } ],
+      'BAIC': [ { m:'X7', p:5000 } ],
+      'Exeed': [ { m:'RX', p:5000 } ],
+      'GAC': [ { m:'GS8 (кроме GL)', p:4000 }, { m:'M8', p:4000 } ],
+      'FAW': [ { m:'Bestune B70', p:5000 } ],
+      'BG': [ { m:'X70', p:5000 } ],
+    };
 
-    function money(n){ return n? new Intl.NumberFormat('ru-RU').format(n) + ' ₽' : 'Цена по запросу'; }
+    // ===== HELPERS =====
+    const money = n => n ? new Intl.NumberFormat('ru-RU').format(n) + ' ₽' : 'Цена по запросу';
 
     function makeCarousel(key){
       const urls = [
-        `https://source.unsplash.com/800x600/?${encodeURIComponent(key+',car exterior')}`,
-        `https://source.unsplash.com/800x600/?${encodeURIComponent(key+',car interior')}`,
-        `https://source.unsplash.com/800x600/?${encodeURIComponent(key+',dashboard')}`,
+        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',car exterior')}`,
+        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',car interior')}`,
+        `https://source.unsplash.com/900x600/?${encodeURIComponent(key+',dashboard')}`,
       ];
-      const wrap = document.createElement('div');
-      wrap.className = 'carousel';
-      urls.forEach((u,i)=>{
-        const img = document.createElement('img');
-        img.src = u; img.alt = key; if(i===0) img.classList.add('active');
-        wrap.appendChild(img);
+      const wrap = document.createElement('div'); wrap.className = 'carousel glass ringed';
+      const imgs = urls.map((u,i)=>{
+        const img = document.createElement('img'); img.src = u; img.alt = key; if(i===0) img.classList.add('active'); return img;
       });
-      const ctr = document.createElement('div');
-      ctr.className = 'carousel-controls';
-      const prev = Object.assign(document.createElement('button'), { innerText: '‹', className: 'prev' });
-      const next = Object.assign(document.createElement('button'), { innerText: '›', className: 'next' });
-      ctr.append(prev, next); wrap.appendChild(ctr);
-      let cur = 0; const imgs = ()=> wrap.querySelectorAll('img');
-      const show = i => imgs().forEach((im,idx)=> im.classList.toggle('active', idx===i));
-      prev.addEventListener('click', ()=>{ cur=(cur-1+imgs().length)%imgs().length; show(cur);});
-      next.addEventListener('click', ()=>{ cur=(cur+1)%imgs().length; show(cur);});
+      imgs.forEach(img=> wrap.appendChild(img));
+      const prev = document.createElement('button'); prev.className = 'ctrl prev'; prev.textContent = '‹'; prev.setAttribute('aria-label','Назад');
+      const next = document.createElement('button'); next.className = 'ctrl next'; next.textContent = '›'; next.setAttribute('aria-label','Вперёд');
+      const dots = document.createElement('div'); dots.className = 'dots';
+      const dotEls = imgs.map((_,i)=>{ const d=document.createElement('div'); d.className='dot'+(i? '':' active'); dots.appendChild(d); return d; });
+      wrap.append(prev,next,dots);
+      let cur = 0; const show = i=>{ imgs.forEach((im,idx)=> im.classList.toggle('active', idx===i)); dotEls.forEach((d,idx)=> d.classList.toggle('active', idx===i)); };
+      const go = dir=>{ cur=(cur+dir+imgs.length)%imgs.length; show(cur); };
+      prev.addEventListener('click',()=>go(-1)); next.addEventListener('click',()=>go(1));
+      // Swipe
+      let sx=0; wrap.addEventListener('touchstart',e=> sx=e.touches[0].clientX,{passive:true});
+      wrap.addEventListener('touchend',e=>{ const dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>40) go(dx<0?1:-1); });
       return wrap;
     }
 
     function makeAppsList(){
-      const ul = document.createElement('ul');
-      ul.className = 'text-sm text-white/80 grid grid-cols-1 gap-1';
+      const ul = document.createElement('ul'); ul.className = 'text-sm text-white/80 grid grid-cols-1 gap-1';
       appsCommon.forEach(a=>{ const li = document.createElement('li'); li.textContent=a; ul.appendChild(li); });
       return ul;
     }
 
     function makeModelItem(brand, model){
-      const acc = document.createElement('div'); acc.className = 'accordion glass rounded-xl p-3';
-      const btn = document.createElement('button'); btn.className = 'w-full text-left flex items-center justify-between text-sm';
+      const acc = document.createElement('div'); acc.className = 'acc glass rounded-2xl p-3 ringed';
+      const btn = document.createElement('button'); btn.className = 'w-full text-left flex items-center justify-between text-sm'; btn.setAttribute('aria-expanded','false');
       const left = document.createElement('div');
-      left.innerHTML = `<span class="font-medium">${model.m}</span> <span class="ml-2 text-white/60">— ${money(model.p)}</span>${model.note? ` <span class='tag ml-2'>${model.note}</span>`: ''}`;
+      left.innerHTML = `<span class="font-medium">${model.m}</span> <span class="ml-2 text-white/60">— ${money(model.p)}</span>${model.note? ` <span class='ml-2 text-[11px] px-2 py-0.5 rounded-full border border-white/15 bg-white/10'>${model.note}</span>`: ''}`;
       const plus = document.createElement('span'); plus.textContent = '+';
-      btn.append(left, plus); btn.setAttribute('data-acc','');
-      const content = document.createElement('div'); content.className = 'accordion-content mt-2 space-y-3';
+      btn.append(left, plus);
+      const content = document.createElement('div'); content.className = 'acc-content mt-3 space-y-3';
       const key = `${brand} ${model.m}`;
       content.appendChild(makeCarousel(key));
-      const sub = document.createElement('div'); sub.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3';
+      const grid = document.createElement('div'); grid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-3';
       const apps = document.createElement('div'); apps.appendChild(makeAppsList());
-      const price = document.createElement('div'); price.innerHTML = `<div class='glass rounded-xl p-3'><div class='text-xs text-white/60 mb-1'>Стоимость</div><div class='text-lg font-semibold'>${money(model.p)}</div><div class='text-xs text-white/60 mt-1'>🔥 Браузер (рутуб, фильмы): 2000 ₽</div></div>`;
-      sub.append(apps, price); content.appendChild(sub);
+      const price = document.createElement('div'); price.className='glass rounded-2xl p-3 ringed'; price.innerHTML = `<div class='text-xs text-white/60 mb-1'>Стоимость</div><div class='text-lg font-semibold'>${money(model.p)}</div><div class='text-xs text-white/60 mt-1'>🔥 Браузер (рутуб, фильмы): 2000 ₽</div>`;
+      grid.append(apps, price); content.appendChild(grid);
       acc.append(btn, content);
-      btn.addEventListener('click', ()=> acc.classList.toggle('open'));
+      btn.addEventListener('click',()=>{ acc.classList.toggle('open'); const expanded = acc.classList.contains('open'); btn.setAttribute('aria-expanded', expanded); });
+      acc.setAttribute('data-reveal','');
       return acc;
     }
 
-    function makeBrandCard(brand, models){
-      const card = document.createElement('div'); card.className = 'glass rounded-2xl p-4 shadow-glow accordion';
-      const head = document.createElement('button'); head.className = 'w-full text-left flex items-center justify-between'; head.setAttribute('data-acc','');
+    function makeBrandBlock(brand, models){
+      const wrap = document.createElement('div'); wrap.className = 'acc glass rounded-3xl p-4 ringed'; wrap.setAttribute('data-reveal','');
+      const head = document.createElement('button'); head.className = 'w-full text-left flex items-center justify-between'; head.setAttribute('aria-expanded','false');
       head.innerHTML = `<span class='font-medium'>${brand}</span><span>+</span>`;
-      const body = document.createElement('div'); body.className = 'accordion-content mt-3 pl-1 space-y-2';
+      const body = document.createElement('div'); body.className = 'acc-content mt-3 space-y-3';
       models.forEach(m=> body.appendChild(makeModelItem(brand, m)));
-      card.append(head, body);
-      head.addEventListener('click', ()=> card.classList.toggle('open'));
-      return card;
+      wrap.append(head, body);
+      head.addEventListener('click',()=>{ wrap.classList.toggle('open'); const expanded = wrap.classList.contains('open'); head.setAttribute('aria-expanded', expanded); });
+      return wrap;
     }
 
-    const grid = document.getElementById('brandsGrid');
-    Object.entries(catalog).forEach(([brand, models])=> grid.appendChild(makeBrandCard(brand, models)));
+    // Build list (one column)
+    const list = document.getElementById('brandsList');
+    Object.entries(catalog).forEach(([brand, models])=> list.appendChild(makeBrandBlock(brand, models)));
 
+    // Footer year
     document.getElementById('y').textContent = new Date().getFullYear();
 
-    ScrollReveal().reveal('[data-sr]', { distance:'20px', duration:800, interval:150, origin:'bottom' });
+    // Reveal on view
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } });
+    },{ threshold: 0.1 });
+    document.querySelectorAll('[data-reveal]').forEach(el=> io.observe(el));
   </script>
 </body>
 </html>
